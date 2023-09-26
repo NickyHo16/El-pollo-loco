@@ -1,6 +1,6 @@
 class MovableObject {
     x = 120;
-    y = 250;
+    y = 280;
     img;
 
     height = 150;
@@ -17,6 +17,5 @@ class MovableObject {
     }
 
     moveLeft() {
-
     }
 }
