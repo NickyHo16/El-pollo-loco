@@ -22,13 +22,14 @@ class Chicken extends MovableObject {
     }
 
     animate() {
-        this.moveLeft();
+        setInterval(() => {         //diese Funktion beschreibt, wie oft etwas ausgeführt werden soll
+            this.moveLeft();
+        }, 1000 / 60);              // ...jede Sekunde verändert sich die x-Achse // alles in der geschweiften Klammer wird alle 1000 millisekunden ausgeführt
+
+
 
         setInterval(() => {                     // damit die Funktion wieder mehr als einmal ausgeführt werden kann
-            let i = this.currentImage % this.IMAGES_WALKING.length; // ist das Gleiche wie = let i= 0 % 6; null geteilt duch sechs = 0, Rest 0
-            let path = this.IMAGES_WALKING[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;                // um das gesetzte image immer um eins zu erhöhen
+            this.playAnimation(this.IMAGES_WALKING);
         }, 200);                               // soll alle 200 ms ausgeführt werden
     }
 
