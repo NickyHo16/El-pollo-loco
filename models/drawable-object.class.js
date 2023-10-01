@@ -17,6 +17,17 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height); // hier wir dann das gespiegelte Bild eingefügt
     }
 
+    drawFrame(ctx) {
+        if (this instanceof Character || this instanceof Chicken) { //damit wird der Rahmen nur ausgeführt, wenn wir eine Instance von Character oder von Chicken sind.
+            // Red rectangle
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+    }
+
     /**
      * 
      * @param {Array} arr - ['img/image1.png','img/image1.png', ...]
