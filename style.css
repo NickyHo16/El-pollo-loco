@@ -3,9 +3,56 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    background-image: url('img/10_background/background4.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: 'fredericka', 'Arial Narrow', Arial, sans-serif;
+}
+
+@font-face {
+    font-family: 'fredericka';
+    src: url('fonts/FrederickatheGreat-Regular.ttf') format(truetype);
+}
+
+h1 {
+    font-size: 56px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+h3 {
+    font-size: 28px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 canvas {
     background-color: black;
+    display: block;
+}
+
+/*.......... smartphones .............. */
+
+@media only screen and (max-width:720px) {
+    canvas {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-height:480px) {
+    canvas {
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    h3 {
+        display: none;
+    }
+
 }

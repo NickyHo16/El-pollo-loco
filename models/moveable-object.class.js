@@ -17,7 +17,11 @@ class MovableObject extends DrawableObject {
     };
 
     isAboveGround() {
-        return this.y < 160
+        if (this instanceof ThrowableObject) { // ThrowableObjects should always fall
+            return true;
+        } else {
+            return this.y < 160;
+        }
     };
 
     //charcter.isColliding(chicken)
@@ -30,9 +34,13 @@ class MovableObject extends DrawableObject {
 
     hit() {
         this.energy -= 5;
+        this.hit_sound.play();
         if (this.energy < 0) {
             this.energy = 0;
-            // this.hit_sound.play();            
+            this.hit_sound.pause();
+            this.isdead_sound.play();
+            //this.speedY -= this.acceleration;
+            //this.isdead_sound.pause();
         } else {
             this.lastHit = new Date().getTime();          //so werden Zeiten in Zahlenformen gespeichert //Difference in ms
         }

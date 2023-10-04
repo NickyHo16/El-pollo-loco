@@ -32,6 +32,9 @@ window.addEventListener("keydown", (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;            //Taste Space/Leerzeichen wurde gedrückt
     }
+    if (e.keyCode == 68) {
+        keyboard.D = true;            //Taste Space/Leerzeichen wurde gedrückt
+    }
     console.log(e);
 });
 
@@ -51,6 +54,9 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = false;            //Taste Space/Leerzeichen wurde losgelassen
+    }
+    if (e.keyCode == 68) {
+        keyboard.D = false;            //Taste Space/Leerzeichen wurde losgelassen
     }
     console.log(e);
 });

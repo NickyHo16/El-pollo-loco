@@ -70,8 +70,9 @@ class Character extends MovableObject {
 
     world;
     walking_sound = new Audio('audio/running_ice.mp3');
-    jumping_sound = new Audio('audio/jump.mp3');
+    jumping_sound = new Audio('audio/hu.mp3');
     hit_sound = new Audio('audio/ohwah.mp3');
+    isdead_sound = new Audio('audio/dead_sound2.mp3');
 
 
 
@@ -81,7 +82,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         //this.loadImages(this.IMAGES_IDLE);
-        //this.loadImages(this.IMAGES_LONG_IDLE);
+        this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
         this.animate();
@@ -117,11 +118,13 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {              //Wenn er sich in der Luft befindet,
                 this.playAnimation(this.IMAGES_JUMPING);    // zeigen wir diese Animation an 
-            } else {                                        // und wenn nicht, zeigen wir die nachfolgenden Bilder an:
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {  //logisches oder || entweder links true oder rechts true
-                    //this.x += this.speed;                    
-                    this.playAnimation(this.IMAGES_WALKING);//walk animation
-                }
+            } else if                                       // und wenn nicht, zeigen wir die nachfolgenden Bilder an:
+                (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {  //logisches oder || entweder links true oder rechts true
+                //this.x += this.speed;                    
+                this.playAnimation(this.IMAGES_WALKING);//walk animation
+            } else {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+
             }
         }, 50);                               // soll alle 50 ms ausgeführt werden
     }
