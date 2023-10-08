@@ -81,7 +81,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);     //wir laden die Bilder am Anfang // super() verwenden wir nur einmal, danach reicht this. ...
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
-        //this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
@@ -122,16 +122,19 @@ class Character extends MovableObject {
                 (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {  //logisches oder || entweder links true oder rechts true
                 //this.x += this.speed;                    
                 this.playAnimation(this.IMAGES_WALKING);//walk animation
+            } else if (this.world.keyboard.D) {
+                this.playAnimation(this.IMAGES_IDLE);//IDLE animation
             } else {
-                this.playAnimation(this.IMAGES_LONG_IDLE);
-
+                this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 50);                               // soll alle 50 ms ausgeführt werden
+        }, 100);                               // soll alle 50 ms ausgeführt werden //war vorher 50
     }
 
     jump() {
         this.speedY = 30;
     }
+
+
 
 
 }

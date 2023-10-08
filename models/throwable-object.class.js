@@ -19,4 +19,5 @@ class ThrowableObject extends MovableObject {
         }, 25);              //Funktion soll alle 50ms ausgeführt werden
     }
 
+
 }

@@ -8,6 +8,8 @@ const level1 = new Level( //const weil ich es niemals verändern möchte, sonst 
 
     [
         new Cloud(),
+        new Cloud(1438),
+        new Cloud(5752),
     ],
 
     [
