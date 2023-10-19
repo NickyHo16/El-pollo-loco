@@ -1,15 +1,37 @@
 const level1 = new Level( //const weil ich es niemals verändern möchte, sonst könnte ich auch let nehmen
+
     [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
+        //new Chicken(),
+        //new Chicken(),
+        //new Chicken(),
+        //new ChickenSmall(),
+        //new ChickenSmall(),
+        //new ChickenSmall(),
+        //new Coins(),
+        // new Coins(),
         new Endboss(),
     ],
 
     [
         new Cloud(),
-        new Cloud(1438),
-        new Cloud(5752),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+
+    ],
+    [
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
     ],
 
     [
@@ -38,6 +60,7 @@ const level1 = new Level( //const weil ich es niemals verändern möchte, sonst 
         new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 3),
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 3),
 
-    ]
+    ],
+
 
 ); 

@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    coins = 0;
 
     otherDirection = false;
 
@@ -43,6 +44,17 @@ class MovableObject extends DrawableObject {
 
         } else {
             this.lastHit = new Date().getTime();          //so werden Zeiten in Zahlenformen gespeichert //Difference in ms
+        }
+    }
+
+    collecting() {  //N1
+        this.coins += 5;
+    }
+
+    removeThisCoin(coin) {//N3
+        const index = this.coins.indexOf(coin);
+        if (index !== -1) {
+            this.coins.splice(coin, 1);
         }
     }
 

@@ -10,6 +10,7 @@ class World {
     coinBar = new CoinBar();
     endbossBar = new EndbossBar();
     throwableObjects = [];
+    coins = this.level.coins;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -28,6 +29,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkCollisionCoins();
         }, 200);       //1x? pro Sekunde prüfen, ob Elemente kolliedieren oder nicht
     }
 
@@ -47,6 +49,17 @@ class World {
         });
     }
 
+    checkCollisionCoins() { //N2
+        this.level.coins.forEach((coins, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+            if (this.character.isColliding(coins)) {
+                this.character.collecting();
+                console.log("Kollision erkannt, lösche Münze an Index " + index);
+                this.coins.splice(index, 1);
+                this.coinBar.setCollectedCoins(this.character.coins);
+            }
+        });
+    }
+
     draw() { // weil die Welt gezeichnet werden muss
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)//canvas wird gelöscht
 
@@ -54,6 +67,8 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
 
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
+
 
         this.ctx.translate(-this.camera_x, 0);//Back
         //----Space for fixed objects----
