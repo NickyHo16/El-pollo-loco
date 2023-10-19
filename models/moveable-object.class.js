@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     coins = 0;
+    salsabottles = 0;
 
     otherDirection = false;
 
@@ -47,8 +48,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    collecting() {  //N1
-        this.coins += 5;
+    collectingCoins() {  //N1
+        this.coins += 20;
+    }
+
+    collectingBottles() {  //N5
+        this.salsabottles += 20;
     }
 
     removeThisCoin(coin) {//N3

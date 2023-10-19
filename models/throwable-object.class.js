@@ -16,7 +16,7 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
-    splash_sound = new Audio('audio/broken_glas.mp3');
+    splash_sound = new Audio('audio/bottle_splash.mp3');
 
 
     constructor(x, y) {
@@ -34,16 +34,16 @@ class ThrowableObject extends MovableObject {
         this.speedY = 30;
         this.applyGravity();
         setInterval(() => {                                    //hier müssen wir regelmäßig die Y Achse verringern
-            this.splash_sound.pause();
+            //this.splash_sound.pause();
             if (this.y >= 280) {
                 
                 this.playAnimation(this.IMAGES_BOTTLESPLASH);
-                      
+                //this.splash_sound.play();// sound hört nicht auf zu spielen
            }
              else {
                 this.playAnimation(this.IMAGES_BOTTLEROTATION);
-                this.x += 10;
-                
+                this.x += 10;  
+                      
                 
             }
         }, 25);              //Funktion soll alle 50ms ausgeführt werden

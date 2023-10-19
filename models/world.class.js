@@ -11,6 +11,7 @@ class World {
     endbossBar = new EndbossBar();
     throwableObjects = [];
     coins = this.level.coins;
+    salsabottles = this.level.salsabottles;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -30,6 +31,7 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkCollisionCoins();
+            this.checkCollisionBottles();
         }, 200);       //1x? pro Sekunde prüfen, ob Elemente kolliedieren oder nicht
     }
 
@@ -52,10 +54,21 @@ class World {
     checkCollisionCoins() { //N2
         this.level.coins.forEach((coins, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
             if (this.character.isColliding(coins)) {
-                this.character.collecting();
+                this.character.collectingCoins();
                 console.log("Kollision erkannt, lösche Münze an Index " + index);
                 this.coins.splice(index, 1);
                 this.coinBar.setCollectedCoins(this.character.coins);
+            }
+        });
+    }
+
+    checkCollisionBottles() { //N4
+        this.level.salsabottles.forEach((salsabottle, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+            if (this.character.isColliding(salsabottle)) { //wird las backgroundobjekt definiert aber warum? ist nicht richtig denn der Hintergrund wird gelöscht
+                this.character.collectingBottles();
+                console.log("Kollision erkannt, lösche Bottle an Index " + index);
+                this.salsabottles.splice(index, 1);
+                this.trowBottleBar.setCollectedBottles(this.character.salsabottles);
             }
         });
     }
@@ -64,12 +77,12 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)//canvas wird gelöscht
 
         this.ctx.translate(this.camera_x, 0);
+        // this.addObjectsToMap(this.level.salsabottles);
         this.addObjectsToMap(this.level.backgroundObjects);
 
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
-
-
+        this.addObjectsToMap(this.level.salsabottles);
         this.ctx.translate(-this.camera_x, 0);//Back
         //----Space for fixed objects----
         this.addToMap(this.statusBar);

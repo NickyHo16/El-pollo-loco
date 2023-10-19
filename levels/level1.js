@@ -6,9 +6,7 @@ const level1 = new Level( //const weil ich es niemals verändern möchte, sonst 
         //new Chicken(),
         //new ChickenSmall(),
         //new ChickenSmall(),
-        //new ChickenSmall(),
-        //new Coins(),
-        // new Coins(),
+        //new ChickenSmall(),        
         new Endboss(),
     ],
 
@@ -19,8 +17,8 @@ const level1 = new Level( //const weil ich es niemals verändern möchte, sonst 
         new Cloud(),
         new Cloud(),
         new Cloud(),
-
     ],
+
     [
         new Coins(),
         new Coins(),
@@ -30,8 +28,18 @@ const level1 = new Level( //const weil ich es niemals verändern möchte, sonst 
         new Coins(),
         new Coins(),
         new Coins(),
-        new Coins(),
-        new Coins(),
+        //new Coins(),
+        //new Coins(),
+    ],
+
+    [
+        new SalsaBottle(),
+        new SalsaBottle(),
+        new SalsaBottle(),
+        new SalsaBottle(),
+        new SalsaBottle(),
+        new SalsaBottle(),
+        new SalsaBottle(),
     ],
 
     [
