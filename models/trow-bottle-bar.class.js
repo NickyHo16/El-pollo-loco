@@ -26,7 +26,7 @@ class TrowBottleBar extends DrawableObject {
         this.collectedBottles = collectedBottles;   // => aus dieser Prozentzahl müssen wir nun eine Zahl zwischne 0... und 5 ermitteln, weil wir 5 Bilder haben. Mit folgender if Abfrage.
         let path = this.BOTTLE_IMAGES[this.resolveImageIndex()];//hier müssen wir sagen welches Bild / der Pfad von null bis 5 wird dort eingefügt.
         this.img = this.imageCache[path];   //Bild holen/laden aus dem Cache und in die Variable img und dadurch wird durch percentage immer das jeweilige Image angezeigt
-        this.bottle_sound.play();//Sound an anderer Stelle aufrufen, weil sonst Consolen Fehler kommt 
+        //this.bottle_sound.play();//Sound an anderer Stelle aufrufen, weil sonst Consolen Fehler kommt 
     }
     resolveImageIndex() {
         if (this.collectedBottles >= 100) {

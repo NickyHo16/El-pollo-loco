@@ -88,6 +88,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.trowBottleBar);
         this.addToMap(this.coinBar);
+        this.addToMap(this.endbossBar);
 
         this.ctx.translate(this.camera_x, 0);//forward
 
@@ -95,7 +96,7 @@ class World {
         //alle Varibalen, die wir aus dieser Klasse verwenden, müssen wir mit -this- öffnen.
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-        this.addToMap(this.endbossBar);
+        //this.addToMap(this.endbossBar);
 
         this.ctx.translate(-this.camera_x, 0);
 
