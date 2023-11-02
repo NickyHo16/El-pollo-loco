@@ -19,7 +19,7 @@ class ThrowableObject extends MovableObject {
     splash_sound = new Audio('audio/bottle_splash.mp3');
 
 
-    constructor(x, y) {
+    constructor(x, y, endboss) {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_BOTTLEROTATION);
         this.loadImages(this.IMAGES_BOTTLESPLASH);
@@ -27,7 +27,9 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.height = 100;
         this.width = 90;
+        this.endboss = endboss; // Hier wird der endboss übergeben
         this.throw();
+        this.hasHitBoss = false;
     }
 
     throw() {
@@ -39,6 +41,11 @@ class ThrowableObject extends MovableObject {
                 
                 this.playAnimation(this.IMAGES_BOTTLESPLASH);
                 //this.splash_sound.play();// sound hört nicht auf zu spielen
+           // Überprüfen Sie die Kollision mit dem Endboss
+          // if (this.isColliding(this.world.level.enemies.endboss)) {
+          //  this.world.level.enemies.endboss.hitBoss(); // Verursachen Sie Schaden am Endboss
+           // this.world.endbossBar.setBosshealth(this.world.endboss.bosshealth); // Aktualisieren Sie die Anzeige der Endboss-Gesundheit
+        //}
            }
              else {
                 this.playAnimation(this.IMAGES_BOTTLEROTATION);

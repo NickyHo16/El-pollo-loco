@@ -77,8 +77,7 @@ class Endboss extends MovableObject {
 
     animate() {
         let i = 0;
-        //const bossX = this.x; // Hier gehen wir davon aus, dass die x-Position des Endbosses in this.x gespeichert ist.
-        //const radius = 2500;
+        // Hier gehen wir davon aus, dass die x-Position des Endbosses in this.x gespeichert ist.
 
         setInterval(() => {
             if (i < 10) {
@@ -88,7 +87,8 @@ class Endboss extends MovableObject {
                     this.playAnimation(this.IMAGES_BOSSRUN);
                     this.moveLeft();
                     if (this.x <= 650) {
-                        this.playAnimation(this.IMAGES_WALKING);
+                        this.playAnimation(this.IMAGES_BOSSATTACK);
+                        this.stopMovingLeft();
                     }
                 } else {
                     this.playAnimation(this.IMAGES_WALKING);

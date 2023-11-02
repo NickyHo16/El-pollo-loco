@@ -12,6 +12,8 @@ class World {
     throwableObjects = [];
     coins = this.level.coins;
     salsabottles = this.level.salsabottles;
+    enemies = this.level.enemies;
+    //endboss = this.level.enemies.endboss;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -32,6 +34,7 @@ class World {
             this.checkThrowObjects();
             this.checkCollisionCoins();
             this.checkCollisionBottles();
+            this.checkCollisionsBottlesToEndboss()
         }, 200);       //1x? pro Sekunde prüfen, ob Elemente kolliedieren oder nicht
     }
 
@@ -64,12 +67,24 @@ class World {
 
     checkCollisionBottles() { //N4
         this.level.salsabottles.forEach((salsabottle, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
-            if (this.character.isColliding(salsabottle)) { //wird las backgroundobjekt definiert aber warum? ist nicht richtig denn der Hintergrund wird gelöscht
+            if (this.character.isColliding(salsabottle)) {
                 this.character.collectingBottles();
                 console.log("Kollision erkannt, lösche Bottle an Index " + index);
                 this.salsabottles.splice(index, 1);
                 this.trowBottleBar.setCollectedBottles(this.character.salsabottles);
             }
+        });
+    }
+
+    checkCollisionsBottlesToEndboss() {
+        this.enemies.forEach((enemy) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+            this.throwableObjects.forEach((bottle) => {
+                if (bottle.isColliding(enemy) && !bottle.hasHitBoss) {// Wenn eine Kollision zwischen der Flasche und dem Endboss auftritt:
+                    bottle.hitBoss(this.endbossBar);
+                    this.endbossBar.setBosshealth(this.endbossBar.bosshealth);
+                    bottle.hasHitBoss = true;
+                }
+            });
         });
     }
 
@@ -96,7 +111,6 @@ class World {
         //alle Varibalen, die wir aus dieser Klasse verwenden, müssen wir mit -this- öffnen.
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-        //this.addToMap(this.endbossBar);
 
         this.ctx.translate(-this.camera_x, 0);
 

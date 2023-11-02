@@ -3,6 +3,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
+    bosshealth = 100;
     lastHit = 0;
     coins = 0;
     salsabottles = 0;
@@ -30,8 +31,8 @@ class MovableObject extends DrawableObject {
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height;
+            this.x < mo.x + mo.width && // Verwenden von mo.x + mo.width statt mo.x allein
+            this.y < mo.y + mo.height; // Verwenden von mo.y + mo.height statt mo.y allein
     }
 
     hit() {
@@ -48,6 +49,17 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitBoss(endbossBar) {
+        endbossBar.bosshealth -= 25;
+        //this.hit_sound.play();
+        if (endbossBar.bosshealth < 0) {
+            endbossBar.bosshealth = 0;
+            //this.hit_sound.pause();
+        } else {
+            this.lastHit = new Date().getTime();          //so werden Zeiten in Zahlenformen gespeichert //Difference in ms
+        }
+    }
+
     collectingCoins() {  //N1
         this.coins += 20;
     }
@@ -55,6 +67,7 @@ class MovableObject extends DrawableObject {
     collectingBottles() {  //N5
         this.salsabottles += 20;
     }
+
 
     removeThisCoin(coin) {//N3
         const index = this.coins.indexOf(coin);
@@ -91,6 +104,10 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 30;
+    }
+
+    stopMovingLeft() {
+        this.speed = 0;
     }
 }
 
