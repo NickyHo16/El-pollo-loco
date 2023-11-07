@@ -86,6 +86,10 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;        //wenn die Energy 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
     }
 
+    isBossDead() {                          //diese Funktion soll true returnen wenn er tot ist, und anderenfalls false
+        return world.endbossBar.bosshealth == 0;        //wenn die bosshealth 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
+    }
+
     playAnimation(images) {
         //walk animation
         let i = this.currentImage % images.length; // ist das Gleiche wie = let i= 0 % 6; null geteilt duch sechs = 0, Rest 0

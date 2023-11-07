@@ -37,11 +37,12 @@ class Endboss extends MovableObject {
     ];
     IMAGES_BOSSDEAD = [
         'img/4_enemie_boss_chicken/5_dead/G24.png',
-        'img/4_enemie_boss_chicken/5_dead/G24.png',
-        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
 
     hadFirstContact = false;
+
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
@@ -53,6 +54,10 @@ class Endboss extends MovableObject {
         this.x = 2500;
         this.animate();
     }
+
+    /**
+     * Junus Boss Animate function
+     */
 
     //animate() {
     //    let i = 0;                                          //variable hinzugefügt, damit das Bild von Anfang abgespielt werden kann
@@ -74,98 +79,132 @@ class Endboss extends MovableObject {
     //  }
 
 
+    /**
+     * real function Boss Animate start
+     */
+
+    //animate() {
+    //    let i = 0;
+    // Hier gehen wir davon aus, dass die x-Position des Endbosses in this.x gespeichert ist.
+
+    // setInterval(() => {
+    //   if (i < 10) {
+    //      if (world.character.x + 400 > this.x) { //(world.character.x > 2100 && world.character.x + 500 > this.x && Math.abs(world.character.x - bossX) < radius) {
+    //          i = 0;
+    //          this.hadFirstContact = true;
+    //        this.playAnimation(this.IMAGES_BOSSATTACK);
+    //      this.moveLeft();
+    //    if (this.x <= 650) {
+    //          this.playAnimation(this.IMAGES_BOSSATTACK);
+    //          this.stopMovingLeft();
+    //       }
+    //   } else if (this.isHurt()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
+    //       this.playAnimation(this.IMAGES_BOSSHURT);
+    //    } else if (this.isBossDead()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
+    //       this.playAnimation(this.IMAGES_BOSSDEAD);
+    //   } else {
+    //       this.playAnimation(this.IMAGES_WALKING);
+    //    }
+
+    //     }
+
+    // }, 200);
+
+    //  }
+
+    /**
+     * real function Boss Animate end
+     */
+
+
+
+
+    //}
+
+
+
+
+
+
+
+
+    //animate() {
+    // let i = 0;
+
+    //setInterval(() => {
+    // if (i < 10) {
+    // if (world.character.x > 2100 && !this.hadFirstContact) {
+    //    i = 0;
+    //      this.hadFirstContact = true;
+
+    //    }
+    //      this.playAnimation(this.IMAGES_WALKING);
+    //    } else {
+    //          this.playAnimation(this.IMAGES_BOSSRUN);
+    //            this.moveLeft();
+    //          }
+    //
+    //        i++;
+    //      }, 200);
+    //  }
+
+    /**
+     * 
+     */
+
+    //animate() {
+    //   let i = 0;
+
+    //  setInterval(() => {
+    //      if (i < 10) {
+    //          if (world.character.x > 2100 && !this.hadFirstContact) {
+    //              i = 0;
+    //              this.hadFirstContact = true;
+
+    //          }
+    //         this.playAnimation(this.IMAGES_WALKING);
+    //      } else {
+    //          this.playAnimation(this.IMAGES_BOSSRUN);
+    //          this.moveLeft();
+    //      }
+
+    //       i++;
+    //   }, 200);
+    //  }
+
+    /**
+     * 
+     */
 
     animate() {
-        let i = 0;
-        // Hier gehen wir davon aus, dass die x-Position des Endbosses in this.x gespeichert ist.
+        let bossDead = false; // Initial ist der Boss nicht tot
+
 
         setInterval(() => {
-            if (i < 10) {
-                if (world.character.x + 400 > this.x) { //(world.character.x > 2100 && world.character.x + 500 > this.x && Math.abs(world.character.x - bossX) < radius) {
-                    i = 0;
-                    this.hadFirstContact = true;
-                    this.playAnimation(this.IMAGES_BOSSRUN);
-                    this.moveLeft();
-                    if (this.x <= 650) {
-                        this.playAnimation(this.IMAGES_BOSSATTACK);
-                        this.stopMovingLeft();
-                    }
-                } else {
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+            if (this.isBossDead() && !bossDead) {
+                console.log('Boss is dead');
+                this.playAnimation(this.IMAGES_BOSSDEAD);
+                bossDead = true; // Setzen Sie die Variable auf true, um anzuzeigen, dass der Boss tot ist
+                return; // Beenden Sie die Funktion// Setzen Sie einen Timer, um sicherzustellen, dass die "Boss is dead" Animation vollständig abgespielt wird
+            }
+            if (bossDead) {
+                // Wenn der Boss tot ist, kehren Sie einfach zurück, ohne andere Animationen zu starten
+                return;
             }
 
+            else if (this.isHurt()) {  // Wenn der Endboss verletzt ist, fahre mit der Hurt-Animation fort
+                console.log('Boss is hurt');
+                this.playAnimation(this.IMAGES_BOSSHURT);
+            } else if (world.character.x + 500 > this.x) { // Wenn der Endboss in der Nähe des Characters ist, spiele die Attack-Animation ab
+                console.log('Boss is attacking');
+                this.playAnimation(this.IMAGES_BOSSATTACK);
+                this.moveLeft();
+            } else {
+                console.log('Boss is walking');
+                this.playAnimation(this.IMAGES_WALKING);
+            }
         }, 200);
 
     }
 
-
-
 }
-
-
-
-
-
-
-
-
-//animate() {
-// let i = 0;
-
-//setInterval(() => {
-// if (i < 10) {
-// if (world.character.x > 2100 && !this.hadFirstContact) {
-//    i = 0;
-//      this.hadFirstContact = true;
-
-//    }
-//      this.playAnimation(this.IMAGES_WALKING);
-//    } else {
-//          this.playAnimation(this.IMAGES_BOSSRUN);
-//            this.moveLeft();
-//          }
-//
-//        i++;
-//      }, 200);
-//  }
-
-//animate() {
-//   let i = 0;
-
-//  setInterval(() => {
-//      if (i < 10) {
-//          if (world.character.x > 2100 && !this.hadFirstContact) {
-//              i = 0;
-//              this.hadFirstContact = true;
-
-//          }
-//         this.playAnimation(this.IMAGES_WALKING);
-//      } else {
-//          this.playAnimation(this.IMAGES_BOSSRUN);
-//          this.moveLeft();
-//      }
-
-//       i++;
-//   }, 200);
-//  }
-
-//  animate() {
-//      let i = 0;
-
-//     setInterval(() => {
-//         if (i < 10) {
-//             if (world.character.x > 2100 && !this.hadFirstContact) {
-//                 i = 0;
-//                 this.hadFirstContact = true;
-//                 this.playAnimation(this.IMAGES_BOSSRUN);
-//                this.moveLeft();
-//             } else {
-//                 this.playAnimation(this.IMAGES_WALKING);
-//              }
-//          } else {
-//               this.playAnimation(this.IMAGES_WALKING);
-//          }
-//          i++;
-//      }, 200);
-//  }

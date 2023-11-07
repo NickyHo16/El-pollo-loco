@@ -33,31 +33,30 @@ class ThrowableObject extends MovableObject {
     }
 
     throw() {
+       // if (this.characterHasBottles()) { // Überprüfen, ob der Charakter noch Flaschen hat       
         this.speedY = 30;
         this.applyGravity();
         setInterval(() => {                                    //hier müssen wir regelmäßig die Y Achse verringern
             //this.splash_sound.pause();
-            if (this.y >= 280) {
-                
+            if (this.y >= 280) {                
                 this.playAnimation(this.IMAGES_BOTTLESPLASH);
-                //this.splash_sound.play();// sound hört nicht auf zu spielen
-           // Überprüfen Sie die Kollision mit dem Endboss
-          // if (this.isColliding(this.world.level.enemies.endboss)) {
-          //  this.world.level.enemies.endboss.hitBoss(); // Verursachen Sie Schaden am Endboss
-           // this.world.endbossBar.setBosshealth(this.world.endboss.bosshealth); // Aktualisieren Sie die Anzeige der Endboss-Gesundheit
-        //}
+                //this.splash_sound.play();// sound hört nicht auf zu spielen           
+           } else if(this.hasHitBoss === true){
+            this.playAnimation(this.IMAGES_BOTTLESPLASH);
            }
              else {
                 this.playAnimation(this.IMAGES_BOTTLEROTATION);
-                this.x += 10;  
-                      
-                
+                this.x += 10;                 
             }
         }, 25);              //Funktion soll alle 50ms ausgeführt werden
     }
+    
+    }
+    //characterHasBottles() {
+      //  return world.trowBottleBar.collectedBottles > 0; // Überprüfen, ob der Charakter noch Flaschen hat
+    //}
+//}
 
-
-}
 
 //JUNUS wurfanimation BOTTLE
 //throw() {
