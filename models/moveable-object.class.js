@@ -16,11 +16,11 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;                         //auf das y die speed abziehen
                 this.speedY -= this.acceleration;              //negative Geschwindigkeit weil es nach unten schiesst/ von speedY die Beschleunigung abziehen
             }
-        }, 1000 / 25);              //Funktion soll 25 Mal pro s ausgeführt werden
+        }, 1000 / 25);                                         //Funktion soll 25 Mal pro s ausgeführt werden
     };
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // ThrowableObjects should always fall
+        if (this instanceof ThrowableObject) {                 // ThrowableObjects should always fall
             return true;
         } else {
             return this.y < 160;
@@ -31,30 +31,16 @@ class MovableObject extends DrawableObject {
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
-            this.x < mo.x + mo.width && // Verwenden von mo.x + mo.width statt mo.x allein
-            this.y < mo.y + mo.height; // Verwenden von mo.y + mo.height statt mo.y allein
+            this.x < mo.x + mo.width &&                     // Verwenden von mo.x + mo.width statt mo.x allein
+            this.y < mo.y + mo.height;                      // Verwenden von mo.y + mo.height statt mo.y allein
     }
 
-    hit() {
-        this.energy -= 5;
-        //this.hit_sound.play();
+    hit(damage = 5) {
+        this.energy -= damage;
         if (this.energy < 0) {
             this.energy = 0;
-            this.hit_sound.pause();
-            //this.isdead_sound.play();       
-            this.y -= this.speedY;             //neu hinzugefügt damit Pepe runterfällt                      
+            this.y -= this.speedY;                         //neu hinzugefügt damit Pepe runterfällt                      
 
-        } else {
-            this.lastHit = new Date().getTime();          //so werden Zeiten in Zahlenformen gespeichert //Difference in ms
-        }
-    }
-
-    hitBoss(endbossBar) {
-        endbossBar.bosshealth -= 25;
-        //this.hit_sound.play();
-        if (endbossBar.bosshealth < 0) {
-            endbossBar.bosshealth = 0;
-            //this.hit_sound.pause();
         } else {
             this.lastHit = new Date().getTime();          //so werden Zeiten in Zahlenformen gespeichert //Difference in ms
         }
@@ -78,24 +64,20 @@ class MovableObject extends DrawableObject {
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;        // wieviel Zeit ist vergangen = aktueller Zeitpunkt - dem Zeitpunkt wo wir das letzte mal getroffen wurden
-        timepassed = timepassed / 1000;               //wenn wir Sekunden wollen//Difference in s         
-        return timepassed < 1;                        //wir wurden innerhalb der letzten 1 Sekunden getroffen//dann returned die Funktion den Wert true
+        timepassed = timepassed / 1000;                              //wenn wir Sekunden wollen//Difference in s         
+        return timepassed < 1;                                       //wir wurden innerhalb der letzten 1 Sekunden getroffen//dann returned die Funktion den Wert true
     }
 
-    isDead() {                          //diese Funktion soll true returnen wenn er tot ist, und anderenfalls false
-        return this.energy == 0;        //wenn die Energy 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
-    }
-
-    isBossDead() {                          //diese Funktion soll true returnen wenn er tot ist, und anderenfalls false
-        return world.endbossBar.bosshealth == 0;        //wenn die bosshealth 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
+    isDead() {                                                       //diese Funktion soll true returnen wenn er tot ist, und anderenfalls false
+        return this.energy == 0;                                     //wenn die Energy 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
     }
 
     playAnimation(images) {
         //walk animation
-        let i = this.currentImage % images.length; // ist das Gleiche wie = let i= 0 % 6; null geteilt duch sechs = 0, Rest 0
+        let i = this.currentImage % images.length;                  // ist das Gleiche wie = let i= 0 % 6; null geteilt duch sechs = 0, Rest 0
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage++;                // um das gesetzte image immer um eins zu erhöhen
+        this.currentImage++;                                        // um das gesetzte image immer um eins zu erhöhen
     };
 
     moveRight() {
@@ -126,3 +108,15 @@ class MovableObject extends DrawableObject {
 //       (this.Y + this.offsetY) <= (obj.Y + obj.height) //&&
 //   obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
 //}
+
+
+
+
+
+/**
+ * diese Funktion benötige ich nicht, weil wir haben die isDead Funktion, die vererbt wird
+ * isBossDead() {                                                   //diese Funktion soll true returnen wenn er tot ist, und anderenfalls false
+        return world.endbossBar.bosshealth == 0;                     //wenn die bosshealth 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
+    }
+
+ */

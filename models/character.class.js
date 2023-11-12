@@ -104,8 +104,8 @@ class Character extends MovableObject {
                 this.otherDirection = true;
             }
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {//!=ist nicht über dem Boden, nur dann springen wir
-                this.jump();                                      // diese Funktion ohne das:&& !this.isAboveGround() und pepe kann fliegen ... 
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {   //!=ist nicht über dem Boden, nur dann springen wir
+                this.jump();                                            // diese Funktion ohne das:&& !this.isAboveGround() und pepe kann fliegen ... 
                 this.jumping_sound.play();
             }
             this.world.camera_x = -this.x + 100;
@@ -122,13 +122,13 @@ class Character extends MovableObject {
             } else if                                       // und wenn nicht, zeigen wir die nachfolgenden Bilder an:
                 (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {  //logisches oder || entweder links true oder rechts true
                 //this.x += this.speed;                    
-                this.playAnimation(this.IMAGES_WALKING);//walk animation
+                this.playAnimation(this.IMAGES_WALKING);    //walk animation
             } else if (this.world.keyboard.D) {
-                this.playAnimation(this.IMAGES_IDLE);//IDLE animation
+                this.playAnimation(this.IMAGES_IDLE);       //IDLE animation
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 100);                               // soll alle 50 ms ausgeführt werden //war vorher 50
+        }, 100);                                            // soll alle 50 ms ausgeführt werden //war vorher 50
     }
 
     jump() {

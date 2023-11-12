@@ -13,7 +13,8 @@ class World {
     coins = this.level.coins;
     salsabottles = this.level.salsabottles;
     enemies = this.level.enemies;
-    //endboss = this.level.enemies.endboss;
+
+    hasHitBoss = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -39,20 +40,42 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && this.trowBottleBar.collectedBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
+            this.trowBottleBar.collectedBottles -= 20;
+            this.character.salsabottles -= 20;
+            this.trowBottleBar.setCollectedBottles(this.trowBottleBar.collectedBottles);
+
         }
     }
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+        this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                if (this.character.isAboveGround()) {
+                    this.character.jump();
+                    enemy.isDead();
+                    console.log('chicken is dead');
+                    enemy.playAnimation(enemy.IMAGES_DEAD);
+                    setTimeout(() => {
+
+                        if (!this.enemies.endboss) {
+                            this.level.enemies.splice(index, 1);
+                            console.log('chicken is far far away');
+                        }
+                    }, 150);
+                } else {
+                    this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
+                }
+                console.log('chicken is dead');
             }
         });
     }
+
+
+
 
     checkCollisionCoins() { //N2
         this.level.coins.forEach((coins, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
@@ -77,12 +100,16 @@ class World {
     }
 
     checkCollisionsBottlesToEndboss() {
-        this.enemies.forEach((enemy) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+        this.enemies.forEach((enemy) => {                             // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
             this.throwableObjects.forEach((bottle) => {
                 if (bottle.isColliding(enemy) && !bottle.hasHitBoss) {// Wenn eine Kollision zwischen der Flasche und dem Endboss auftritt:
-                    bottle.hitBoss(this.endbossBar);
-                    this.endbossBar.setBosshealth(this.endbossBar.bosshealth);
-                    bottle.hasHitBoss = true;
+                    if (enemy instanceof Endboss) {
+                        enemy.hit(25);
+                        this.endbossBar.setBosshealth(enemy.energy);
+                        bottle.hasHitBoss = true;
+                    } else {
+                        enemy.energy = 0;
+                    }
                 }
             });
         });
@@ -151,7 +178,7 @@ class World {
 
     flipImageBack(mo) {
         mo.x = mo.x * -1;
-        this.ctx.restore();                        // alles wieder Rückgängig machen, sodass es nicht mehr gespiegelt ist
+        this.ctx.restore();                     // alles wieder Rückgängig machen, sodass es nicht mehr gespiegelt ist
 
     }
 }

@@ -29,19 +29,21 @@ class ThrowableObject extends MovableObject {
         this.width = 90;
         this.endboss = endboss; // Hier wird der endboss übergeben
         this.throw();
-        this.hasHitBoss = false;
+               
     }
 
     throw() {
-       // if (this.characterHasBottles()) { // Überprüfen, ob der Charakter noch Flaschen hat       
+       // if (this.characterHasBottles()) { // Überprüfen, ob der Charakter noch Flaschen hat   
+      // if (world.trowBottleBar.collectedBottles > 0) {    
         this.speedY = 30;
         this.applyGravity();
+        
         setInterval(() => {                                    //hier müssen wir regelmäßig die Y Achse verringern
             //this.splash_sound.pause();
             if (this.y >= 280) {                
                 this.playAnimation(this.IMAGES_BOTTLESPLASH);
                 //this.splash_sound.play();// sound hört nicht auf zu spielen           
-           } else if(this.hasHitBoss === true){
+           } else if(this.hasHitBoss === true ){
             this.playAnimation(this.IMAGES_BOTTLESPLASH);
            }
              else {
@@ -50,10 +52,10 @@ class ThrowableObject extends MovableObject {
             }
         }, 25);              //Funktion soll alle 50ms ausgeführt werden
     }
+}
     
-    }
     //characterHasBottles() {
-      //  return world.trowBottleBar.collectedBottles > 0; // Überprüfen, ob der Charakter noch Flaschen hat
+      //  return this.trowBottleBar.collectedBottles > 0; // Überprüfen, ob der Charakter noch Flaschen hat
     //}
 //}
 
