@@ -33,10 +33,14 @@ class Chicken extends MovableObject {
 
 
         setInterval(() => {                     // damit die Funktion wieder mehr als einmal ausgeführt werden kann
-            this.playAnimation(this.IMAGES_WALKING);
+
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
+                this.energy = 0;
+            }
+            if (!this.isDead()) {
+                this.playAnimation(this.IMAGES_WALKING);
             }
 
         }, 200);                               // soll alle 200 ms ausgeführt werden

@@ -52,24 +52,27 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isColliding(enemy)) {
+            if (!enemy.isDead() && this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
                     this.character.jump();
                     enemy.isDead();
+                    enemy.energy = 0;
                     console.log('chicken is dead');
                     enemy.playAnimation(enemy.IMAGES_DEAD);
                     setTimeout(() => {
 
-                        if (!this.enemies.endboss) {
+                        if (!this.level.enemies.endboss) {
+                            // enemy.energy = 0;
+                            let index = this.level.enemies.indexOf(enemy);
                             this.level.enemies.splice(index, 1);
                             console.log('chicken is far far away');
                         }
-                    }, 150);
+                    }, 250);
                 } else {
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
                 }
-                console.log('chicken is dead');
+                //  console.log('chicken is dead');
             }
         });
     }
@@ -107,6 +110,7 @@ class World {
                         enemy.hit(25);
                         this.endbossBar.setBosshealth(enemy.energy);
                         bottle.hasHitBoss = true;
+                        bottle.x = bottle.x + 50;
                     } else {
                         enemy.energy = 0;
                     }

@@ -4,9 +4,9 @@ const level1 = new Level( //const weil ich es niemals verändern möchte, sonst 
         new Chicken(),
         new Chicken(),
         new Chicken(),
-        //new ChickenSmall(),
-        //new ChickenSmall(),
         // new ChickenSmall(),
+        // new ChickenSmall(),
+        //new ChickenSmall(),
         new Endboss(),
     ],
 
