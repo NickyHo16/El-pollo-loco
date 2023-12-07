@@ -1,12 +1,15 @@
-const level1 = new Level( //const weil ich es niemals verändern möchte, sonst könnte ich auch let nehmen
+let level1; //const weil ich es niemals verändern möchte, sonst könnte ich auch let nehmen
 
+function initLevel(){
+
+level1 = new Level(
     [
         new Chicken(),
         new Chicken(),
         new Chicken(),
-        // new ChickenSmall(),
-        // new ChickenSmall(),
-        //new ChickenSmall(),
+        new ChickenSmall(),
+        new ChickenSmall(),
+        new ChickenSmall(),
         new Endboss(),
     ],
 
@@ -71,4 +74,4 @@ const level1 = new Level( //const weil ich es niemals verändern möchte, sonst 
     ],
 
 
-); 
+); }

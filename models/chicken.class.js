@@ -37,7 +37,7 @@ class Chicken extends MovableObject {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
-                this.energy = 0;
+                //this.energy = 0;
             }
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);

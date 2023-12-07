@@ -16,7 +16,7 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;                         //auf das y die speed abziehen
                 this.speedY -= this.acceleration;              //negative Geschwindigkeit weil es nach unten schiesst/ von speedY die Beschleunigung abziehen
             }
-        }, 1000 / 25);                                         //Funktion soll 25 Mal pro s ausgeführt werden
+        }, 1000 / 50);                                         //Funktion soll 25 Mal pro s ausgeführt werden//war 25
     };
 
     isAboveGround() {

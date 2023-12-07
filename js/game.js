@@ -12,7 +12,22 @@ function init() {
     //ctx = canvas.getContext('2d');
 
     console.log('My character is', world.character); // oder world['character']
+    mobilbControllBtn();
+    toggleFullscreen();
 
+}
+
+function displayStartScreen() {
+    document.getElementById('startscreen').classList.add('startscreen');
+}
+
+function playNewGame(){
+    initLevel();
+    init();
+    document.getElementById('startscreen').classList.add('dNone');
+    document.getElementById('controlBTNmobile').style.display="flex";
+    document.getElementById('lostGame').classList.add('dNone');
+    document.getElementById('winner').classList.add('dNone');
 }
 
 window.addEventListener("keydown", (e) => {
@@ -60,3 +75,112 @@ window.addEventListener("keyup", (e) => {
     }
     console.log(e);
 });
+
+function mobilbControllBtn() {
+    document.getElementById("btnLeft").addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+    document.getElementById("btnLeft").addEventListener("touchend", (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+
+    document.getElementById("btnRight").addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    document.getElementById("btnRight").addEventListener("touchend", (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+
+    document.getElementById("btnJump").addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+    document.getElementById("btnJump").addEventListener("touchend", (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+
+    document.getElementById("btnThrow").addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        keyboard.D = true;
+    });
+    document.getElementById("btnThrow").addEventListener("touchend", (e) => {
+        e.preventDefault();
+        keyboard.D = false;
+    });
+}
+
+function toggleFullscreen() {
+    let fullscreen = document.getElementById('fullscreenIcon');
+    if(fullscreen){
+    fullscreen.addEventListener('click',()=>{
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+        exitFullscreen(fullscreen);
+    } else {
+        enterFullscreen(fullscreen);
+    }
+});
+    }
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {  // iOS Safari
+        element.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
+
+function openHistoryScreen() {
+    let elementQuestionmark = document.getElementById('historyScreen');
+    let elementSettings = document.getElementById('settingsBox');
+    elementQuestionmark.classList.remove('dNone');
+    elementSettings.style.display = 'none';
+};
+
+function closeHistoryScreen() {
+    let elementQuestionmark = document.getElementById('historyScreen');
+    let elementSettings = document.getElementById('settingsBox');
+    let elementHistory = document.getElementById('historyPepe');
+    elementQuestionmark.classList.add('dNone');
+    elementSettings.style.display = 'flex';
+    elementHistory.style.display = 'flex';
+};
+
+function openHowToPlay() {
+    let elementQuestionmark = document.getElementById('historyScreen');
+    let elementHistory = document.getElementById('historyPepe');
+    elementQuestionmark.classList.remove('dNone');
+    elementHistory.style.display = 'none';
+
+}
+
+function closeHowToPlay() {
+    let elementQuestionmark = document.getElementById('historyScreen');
+    let elementHistory = document.getElementById('historyPepe');
+    elementQuestionmark.classList.add('dNone');
+    elementHistory.style.display = 'flex';
+}
+
+
+
+
+
+/* Alternative (quick and dirty), um alle Intervalle zu beenden. */
+//function clearAllIntervals() {
+//    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+//  }

@@ -18,7 +18,7 @@ class ChickenSmall extends MovableObject {
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);     //super() verwenden wir nur einmal, danach reicht this. ...
-        // this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 200 + Math.random() * 2900; // eine Zahl zwischen 200 und 500
 
         this.speed = 0.15 + Math.random() * 0.25;
@@ -33,10 +33,13 @@ class ChickenSmall extends MovableObject {
 
 
         setInterval(() => {                     // damit die Funktion wieder mehr als einmal ausgeführt werden kann
-            this.playAnimation(this.IMAGES_WALKING);
+
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
+            }
+            if (!this.isDead()) {
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);                               // soll alle 200 ms ausgeführt werden
     }

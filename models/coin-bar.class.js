@@ -10,7 +10,7 @@ class CoinBar extends DrawableObject {
 
     //percentage = 100;
     collectedCoins = 0;
-    coin_sound = new Audio('audio/coinSound.mp3');
+    //coin_sound = new Audio('audio/coinSound.mp3');
 
     constructor() {
         super();
@@ -27,7 +27,7 @@ class CoinBar extends DrawableObject {
         this.collectedCoins = collectedCoins;   // => aus dieser Prozentzahl müssen wir nun eine Zahl zwischne 0... und 5 ermitteln, weil wir 5 Bilder haben. Mit folgender if Abfrage.
         let path = this.COIN_IMAGES[this.resolveImageIndex()];//hier müssen wir sagen welches Bild / der Pfad von null bis 5 wird dort eingefügt.
         this.img = this.imageCache[path];   //Bild holen/laden aus dem Cache und in die Variable img und dadurch wird durch percentage immer das jeweilige Image angezeigt
-        //  this.coin_sound.play();//Sound an anderer Stelle aufrufen, weil sonst Consolen Fehler kommt 
+        //this.coin_sound.play();//Sound an anderer Stelle aufrufen, weil sonst Consolen Fehler kommt 
     }
     resolveImageIndex() {
         if (this.collectedCoins >= 100) {

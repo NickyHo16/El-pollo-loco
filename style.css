@@ -34,6 +34,309 @@ canvas {
     border: 2px solid black;
 }
 
+.dNone {
+    display: none;
+}
+
+.gamepannel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*.......... startscreen ..............*/
+
+.startscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid black;
+    /*z-index: 2;*/
+}
+
+.screens {
+    width: 100%;
+    height: 100%;
+}
+
+.gameContent {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.infoBox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    justify-content: space-between;
+    display: flex;
+    /*z-index: 2;*/
+}
+
+.infoIcons {
+    width: 30px;
+    height: 30px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.playButton {
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    justify-content: center;
+    height: 70px;
+    display: flex;
+    cursor: pointer;
+}
+
+
+
+/*.......... history ..............*/
+
+.historyScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid black;
+}
+
+.oldPaper {
+    width: 100%;
+    height: 100%;
+}
+
+.historyBox {
+    position: absolute;
+    /*display: none;*/
+    /*max-width: 580px;*/
+    top: 50px;
+    left: 0;
+    right: 0;
+    /*margin: 10px;*/
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 50px;
+    padding-right: 50px;
+    /*padding-top: 20px;
+    padding-bottom: 25px;
+    /*overflow: hidden;
+    /*height: 1.1em;
+    word-wrap: break-word;
+    /*white-space: nowrap;
+    animation: typing 35s steps(539) forwards;*/
+}
+
+.settingsBox {
+    position: absolute;
+    /* display: none; 
+    max-width: 580px;*/
+    top: 50px;
+    left: 0;
+    right: 0;
+    /* margin: 10px; */
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.storyBox {
+    /*position: inherit;*/
+    display: flex;
+    text-align: center;
+    /* top: 10vh;
+    left: 10vw;
+    right: 10vw;
+    flex-wrap: wrap;
+    /*overflow: hidden;
+    height: 1.1em;
+    word-wrap: break-word;
+    white-space: nowrap;
+    animation: typing 35s steps(539) forwards;*/
+}
+
+/*.......... howToPlayBox ..............*/
+
+.howToPlayBox {
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    margin-left: 65px;
+    margin-right: 65px;
+    justify-content: space-between;
+    /*justify-content: center;*/
+    display: flex;
+    text-align: center;
+}
+
+.backArrow {
+    position: absolute;
+    top: 75%;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    justify-content: center;
+    height: 35px;
+    display: flex;
+    cursor: pointer;
+
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%; /*539ch;*/
+    }
+}
+
+/*.......... endscreen lost..............*/
+
+.endscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid black;
+}
+
+.newGameBtn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    justify-content: center;
+
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.newGameArrow {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    position: absolute;
+    top: 6vh;
+    z-index: 2;
+}
+
+/*.......... winner screen ..............*/
+
+.winnerscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid black;
+}
+
+.winNewGameArrow {
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top: 48vh;
+    cursor: pointer;
+    z-index: 2;
+}
+.win{
+    margin:0; 
+    position: absolute;
+    top: 44vh;
+}
+
+.winnerPepe {
+    position: absolute;
+    height: 145px;
+    width: 85px;
+    top: 24vh;
+}
+
+.winHeading{
+    margin: 0;
+    margin-top: 45px;
+    /* display: none; */
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+.winDescription{
+    margin: 0; 
+    /* position: absolute; */
+    margin-left: 45px;
+    margin-right: 45px;
+    display: flex;
+    /* margin-top: 50px; */
+    font-size: 18px;
+}
+
+/*.......... mobilControl ..............*/
+
+.mobileControl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid black;
+    display: none;
+}
+
+.mobilControlBox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    justify-content: space-between;
+    display: flex;
+    top: 75%;
+}
+
+.controlIcons {
+    width: 55px;
+    height: 55px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+/*.......... rotate screen .............. */
+
+.rotateScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid black;
+}
+
+.rotatePhoneIMG {
+    width: 135px;
+    height: 135px;
+    position: absolute;
+    top: 4vh;
+}
+
 /*.......... smartphones .............. */
 
 @media only screen and (max-width:720px) {
@@ -45,7 +348,7 @@ canvas {
 
 @media only screen and (max-height:480px) {
     canvas {
-        height: 100vh;
+        height: 99vh;
     }
 
     h1 {
@@ -53,7 +356,442 @@ canvas {
     }
 
     h3 {
-        display: none;
+        display: none!important;
     }
 
 }
+
+/*.......... mobilcontroll .............. */
+
+@media only screen and (max-width:660px) {
+    .controlIcons {
+        width: 40px;
+        height: 40px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+}
+
+@media only screen and (max-width:600px) {
+
+    h2 {
+        font-size: 18px;
+    }
+
+
+}
+
+@media only screen and (max-width:540px) {
+
+    .mobilControlBox {
+        top: 76%;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    .howToPlayBox {
+
+        top: 5vh;
+
+    }
+}
+
+@media only screen and (max-width:500px) {
+
+
+    h2 {
+        font-size: 13px;
+    }
+
+}
+
+
+
+@media only screen and (max-width:430px) {
+
+    .controlIcons {
+        width: 35px;
+        height: 35px;
+    }
+
+    h2 {
+        font-size: 12px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .howToPlayBox {
+
+        top: 55%;
+
+    }
+
+}
+
+@media only screen and (max-width:414px) {
+
+    .controlIcons {
+        width: 35px;
+        height: 35px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 10.5px;
+    }
+
+    h3 {
+        font-size: 17px;
+    }
+
+    .howToPlayBox {
+
+        top: 80%;
+
+    }
+
+    .howToPlayBox {
+
+        top: 55%;
+
+    }
+
+}
+
+@media only screen  and (orientation:landscape){
+    h2 {
+        font-size: 18px;
+    }
+
+    h3 {
+        display: flex;
+    }
+
+    .playButton {        
+        top: 15vh;
+    }
+
+    .rotateScreen {
+        display: none;
+    }
+}
+    
+
+@media only screen  and (orientation:portrait){
+    
+    .mobileControl {        
+        display: none!important;
+    }
+
+}
+
+@media only screen and (max-width:375px) {
+
+    .mobilControlBox {
+        top: 74%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .controlIcons {
+        width: 30px;
+        height: 30px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 10px;
+    }
+
+    h3 {
+        font-size: 15px;
+    }
+
+    .historyBox {
+        top: 35px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .backArrow {
+
+        height: 20px;
+    }
+
+    .settingsBox {
+
+        top: 35px;
+    }
+
+    .howToPlayBox {
+
+        top: 55%;
+
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+}
+
+@media only screen and (max-width:335px) {
+
+    .mobilControlBox {
+        top: 72%;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .controlIcons {
+        width: 25px;
+        height: 25px;
+    }
+
+    .infoIcons {
+        width: 25px;
+        height: 25px;
+
+    }
+
+    .infoBox {
+        margin: 0px;
+    }
+
+    .playButton {
+        top: 7vh;
+        height: 50px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 9px;
+    }
+
+    .historyBox {
+        top: 35px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .backArrow {
+
+        height: 20px;
+    }
+
+    .settingsBox {
+
+        top: 35px;
+    }
+
+    .howToPlayBox {
+
+        top: 55%;
+
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .playDescription {
+        font-size: 10px;
+    }
+
+}
+
+@media only screen and (max-width:280px) {
+
+    .mobilControlBox {
+        top: 70%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .controlIcons {
+        width: 25px;
+        height: 25px;
+    }
+
+    .infoIcons {
+        width: 25px;
+        height: 25px;
+
+    }
+
+    .infoBox {
+        margin: 0px;
+    }
+
+    .playButton {
+        top: 7vh;
+        height: 50px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h3 {
+        font-size: 13px;
+    }
+
+
+
+    h2 {
+        font-size: 8px;
+    }
+
+    .historyBox {
+        top: 35px;
+    }
+
+    .backArrow {
+
+        height: 20px;
+    }
+
+    .settingsBox {
+
+        top: 35px;
+    }
+
+    .howToPlayBox {
+
+        top: 55%;
+
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .playDescription {
+        font-size: 10px;
+    }
+
+}
+
+
+/**... device controll ...*/
+
+@media only screen and (max-width:932px) and (max-height:430px)and (orientation:landscape){
+
+    .winNewGameArrow {              
+        top: 74vh;
+    }
+    .win{        
+        top: 68vh;
+    }
+    
+    .winnerPepe {        
+        height: 100px;
+        width: 60px;
+        top: 42vh;
+    }
+    
+    .winHeading{        
+        font-size: 23px;
+        margin-top: 25px;        
+    }
+    .winDescription{        
+        font-size: 14px;
+    }
+}
+    
+    @media only screen and (width:1366px) and (height:1024px)and (orientation:landscape){
+        .winNewGameArrow {            
+            top: 37vh;
+        }
+        .win {           
+            top: 35vh;
+        }
+        .winnerPepe {                      
+            top: 20vh;
+        }
+}
+
+@media only screen and (width:1368px) and (height:912px)and (orientation:landscape){
+    .winNewGameArrow {            
+        top: 42vh;
+    }
+    .win {           
+        top: 39vh;
+    }
+    
+}
+
+@media only screen and (width:720px) and (height:540px)and (orientation:landscape){
+    h1{
+        display: none;
+    }
+    
+    h3{
+        display: none;
+    }
+    
+    .winNewGameArrow {            
+        top: 70vh;
+    }
+    .win {           
+        top: 65vh;
+    }
+
+    .winnerPepe {        
+        top: 38vh;
+    }
+    
+}
+
+@media only screen and (width:653px) and (height:280px)and (orientation:landscape){
+    .winDescription {
+        font-size: 10px;
+    }   
+
+    .winHeading {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    .winNewGameArrow {
+    top: 73vh;
+    width: 35px;
+    height: 35px;
+}
+.win {
+    top: 66vh;
+    font-size: 12px;
+}
+
+.winnerPepe {
+    height: 80px;
+    width: 45px;
+    top: 40vh;
+}
+    
+}
+

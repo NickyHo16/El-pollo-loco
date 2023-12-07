@@ -16,6 +16,9 @@ class World {
 
     hasHitBoss = false;
 
+    coin_sound = new Audio('audio/coinSound.mp3');
+    bottle_sound = new Audio('audio/bottle_clank.mp3');
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -36,7 +39,7 @@ class World {
             this.checkCollisionCoins();
             this.checkCollisionBottles();
             this.checkCollisionsBottlesToEndboss()
-        }, 200);       //1x? pro Sekunde prüfen, ob Elemente kolliedieren oder nicht
+        }, 100);       //1x? pro Sekunde prüfen, ob Elemente kolliedieren oder nicht
     }
 
     checkThrowObjects() {
@@ -58,10 +61,10 @@ class World {
                     enemy.isDead();
                     enemy.energy = 0;
                     console.log('chicken is dead');
-                    enemy.playAnimation(enemy.IMAGES_DEAD);
+                    //enemy.playAnimation(enemy.IMAGES_DEAD);
                     setTimeout(() => {
 
-                        if (!this.level.enemies.endboss) {
+                        if (!(enemy instanceof Endboss)) {
                             // enemy.energy = 0;
                             let index = this.level.enemies.indexOf(enemy);
                             this.level.enemies.splice(index, 1);
@@ -72,7 +75,7 @@ class World {
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
                 }
-                //  console.log('chicken is dead');
+
             }
         });
     }
@@ -87,6 +90,7 @@ class World {
                 console.log("Kollision erkannt, lösche Münze an Index " + index);
                 this.coins.splice(index, 1);
                 this.coinBar.setCollectedCoins(this.character.coins);
+                this.coin_sound.play();
             }
         });
     }
@@ -98,6 +102,7 @@ class World {
                 console.log("Kollision erkannt, lösche Bottle an Index " + index);
                 this.salsabottles.splice(index, 1);
                 this.trowBottleBar.setCollectedBottles(this.character.salsabottles);
+                this.bottle_sound.play();
             }
         });
     }

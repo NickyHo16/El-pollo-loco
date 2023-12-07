@@ -2,7 +2,6 @@ class Character extends MovableObject {
     y = 80;
     height = 270;
     width = 150;
-
     speed = 10;
 
     IMAGES_WALKING = [
@@ -74,6 +73,8 @@ class Character extends MovableObject {
     hit_sound = new Audio('audio/ohwah.mp3');
     isdead_sound = new Audio('audio/dead_sound2.mp3');
 
+    isDeadSoundPlayed = false;
+
 
 
     constructor() {
@@ -95,12 +96,12 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                //this.walking_sound.play();
+                this.walking_sound.play();
             }
 
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
-                //this.walking_sound.play();
+                this.walking_sound.play();
                 this.otherDirection = true;
             }
 
@@ -113,10 +114,13 @@ class Character extends MovableObject {
 
 
         setInterval(() => {                                 // damit die Funktion wieder mehr als einmal ausgeführt werden kann
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
+            if (this.isDead()&& !this.isDeadSoundPlayed) {
+                this.isdead_sound.play();
+                this.isDeadSoundPlayed = true;
+                this.playAnimation(this.IMAGES_DEAD);                                
             } else if (this.isHurt()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
                 this.playAnimation(this.IMAGES_HURT);
+                this.hit_sound.play();
             } else if (this.isAboveGround()) {              //Wenn er sich in der Luft befindet,
                 this.playAnimation(this.IMAGES_JUMPING);    // zeigen wir diese Animation an 
             } else if                                       // und wenn nicht, zeigen wir die nachfolgenden Bilder an:

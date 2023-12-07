@@ -9,7 +9,7 @@ class TrowBottleBar extends DrawableObject {
     ];
 
     collectedBottles = 0;
-    bottle_sound = new Audio('audio/bottle_clank.mp3');//this.coin_sound.play();
+    //bottle_sound = new Audio('audio/bottle_clank.mp3');//this.coin_sound.play();
 
     constructor() {
         super();

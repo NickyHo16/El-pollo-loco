@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EL POLLO LOCO</title>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/moveable-object.class.js"></script>
     <script src="models/character.class.js"></script>
@@ -27,18 +27,150 @@
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/10_background/favicon.png" type="image/x-icon">
+
 
 </head>
 
-<body onload="init()">
+<body onload="displayStartScreen()">
+
 
     <h1>El pollo loco</h1>
+    <div id="fullscreen" class="gamepannel">
+        <div  class="gameContent">
 
-    <canvas id="canvas" width="720" height="480">
+            <canvas id="canvas" width="720" height="480"></canvas>
+
+            <div id="startscreen" class="startscreen ">
+                <div class="infoBox">
+                    <div> <img onclick="openHowToPlay()" class="infoIcons" src="img/11_controlArrows/settings-4-256.png"
+                            alt="How To Play">
+                        <img class="infoIcons" src="img/11_controlArrows/volume-up-4-256.png" alt="Sounds">
+                    </div>
+                    <div><img onclick="openHistoryScreen() " class="infoIcons"
+                            src="img/11_controlArrows/decision-256.png" alt="Pepes Geschichte">
+                        <img onclick="toggleFullscreen()" class="infoIcons"
+                            src="img/11_controlArrows/fullscreen-enter-256.png" alt="FullScreen">
+                    </div>
+                </div>
+                <img class="screens" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Game Intro">
+                <div class="playButton"><img onclick="playNewGame()" id="fullscreenIcon" src="img/11_controlArrows/video-play-3-256.png" alt="Play New Game">
+                </div>
+            </div>
+
+            <div id="historyScreen" class="historyScreen dNone">
+                <div class="infoBox">
+                    <div id="settingsBox" class="settingsBox ">
+                        <div>
+                            <h3 style="margin:0">How To Play</h3>
+                        </div>
+                        <div class="howToPlayBox">
+                            <div> <img class="infoIcons" src="img/11_controlArrows/arrow-92-256.png" alt="Go Left">
+                                <div class="playDescription"><b>LEFT</b> </div>
+                            </div>
+
+                            <div><img class="infoIcons" src="img/11_controlArrows/arrow-28-256.png" alt="Go Right">
+                                <div class="playDescription"><b>RIGHT</b> </div>
+                            </div>
+
+                            <div> <img class="infoIcons" src="img/11_controlArrows/arrow-149-256.png" alt="Jump">
+                                <div class="playDescription"><b>JUMP</b> </div>
+                            </div>
+                            <div> <img class="infoIcons" src="img/11_controlArrows/arrow-58-256.png" alt="Throw Bottle">
+                                <div class="playDescription"><b>THROW</b> </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="historyPepe" class="historyBox ">
+                        <div>
+                            <h3 style="margin:0">"Pepe's Salsarific Quest"</h3>
+                        </div>
+                        <div class="storyBox ">
+                            <h2>
+                                In a magical world where the balance between taste and chaos is at stake, an ancient
+                                curse has been cast. A colossal, malevolent chicken named "Gallus Rex," known as the
+                                "King of Chickens," has plunged the land into disorder. Its dreadful crow has distorted
+                                the flavors of the world, and only Pepe, the brave Salsamagician, can put an end to
+                                this
+                                menace.
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <img class="screens" src="img/12_oldPaper/2302.w058.n003.248B.p1.248-removebg-preview.png"
+                    alt="Game Intro">
+                <div onclick="closeHistoryScreen()" class="backArrow"><img src="img/11_controlArrows/undo-4-256.png"
+                        alt="Play New Game">
+                </div>
+            </div>
+
+            <div id="lostGame" class="endscreen dNone ">
+                <div class="infoBox">
+                    <div class="newGameBtn">
+                        <div>
+                            <h4 style="margin:0">NEW GAME</h4>
+                        </div><img onclick="playNewGame()" class="newGameArrow" src="img/11_controlArrows/undo-4-256.png" alt="Play New Game">
+                    </div>
+                </div>
+                <img class="screens" src="img/9_intro_outro_screens/game_over/game over.png" alt="Game Intro">
+            </div>
+
+            <div id="winner" class="winnerscreen  dNone">
+                <div class="infoBox">
+                    <div  class="newGameBtn">
+                        <div>
+                            <h4 class="winHeading" >The terrible crow falls</h4>
+                        </div><img onclick="playNewGame()" class="winNewGameArrow" src="img/11_controlArrows/undo-4-256.png"
+                            alt="Play New Game">
+                        <h3 class="winDescription" >Pepe, the simple salsa magician, has broken the spell and saved the world from the impending plunge into taste chaos. People and creatures celebrate Pepe as a hero, and the magical world blossoms again in its full splendor. The legend of "Pepe's Salsarific Quest" continues to be told, and Pepe is immortalized in the history books as the brave savior of the taste world. </h3>
+
+                        <img class="winnerPepe" src="img/2_character_pepe/3_jump/J-36.png"
+                            alt="Game Intro">
+                        <h4 class="win" >PLAY AGAIN</h4>
+                    </div>
+                </div>
+                <img class="screens" src="img/12_oldPaper/2302.w058.n003.248B.p1.248-removebg-preview.png"
+                    alt="Game Intro">
+            </div>
 
 
-    </canvas>
+            <div class="rotateScreen  ">
+                <div class="infoBox">
+                    <div  class="newGameBtn">
+                        <div>
+                            
+                        </div><img class="rotatePhoneIMG" src="img/11_controlArrows/mobile-rotation_9482142.png"
+                            alt="Play New Game">   
+                        
+                        <h4 style="margin:0; position: absolute; font-size: 12px;">PLEASE ROTATE YOUR DEVICE</h4>
+                    </div>
+                </div>
+                <img class="screens" src="img/10_background/background4.png"
+                    alt="Device Rotate Image">
+            </div>
+
+
+
+
+            <div id="controlBTNmobile" class="mobileControl  ">
+                <div class="mobilControlBox">
+                    <div> <img id="btnLeft" class="controlIcons" src="img/11_controlArrows/arrow-92-256.png"
+                            alt="Go Left">
+                        <img id="btnRight" class="controlIcons" src="img/11_controlArrows/arrow-28-256.png"
+                            alt="Go Right">
+                    </div>
+                    <div><img id="btnJump" class="controlIcons" src="img/11_controlArrows/arrow-149-256.png" alt="Jump">
+                        <img id="btnThrow" class="controlIcons" src="img/11_controlArrows/arrow-58-256.png"
+                            alt="Throw Bottle">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h3>Walk=Left/Right - Jump=Space - Throw=D </h3>
+
+    
 
 </body>
 
