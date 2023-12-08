@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
     speed = 0.15;
     speedY = 0;
-    acceleration = 2.5;
+    acceleration = 3.5; //1.1 //2.5
     energy = 100;
     bosshealth = 100;
     lastHit = 0;

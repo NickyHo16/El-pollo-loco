@@ -110,7 +110,7 @@ canvas {
 }
 
 .heading {        
-    font-size: 40px;    
+    font-size: 37px;    
 }
 
 .oldPaper {
@@ -303,7 +303,7 @@ canvas {
     bottom: 0;
     right: 0;
     border: 2px solid black;
-    display: none;
+   /* display: none;*/
 }
 
 .mobilControlBox {
@@ -315,12 +315,12 @@ canvas {
     padding-right: 50px;
     justify-content: space-between;
     display: flex;
-    top: 75%;
+    top: 77vh;
 }
 
 .controlIcons {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     padding: 15px;
     cursor: pointer;
 }
@@ -501,7 +501,7 @@ canvas {
 
 @media only screen  and (orientation:landscape){
     h2 {
-        font-size: 18px;
+        font-size: 16px;
     }    
 
     .playButton {        
@@ -511,6 +511,7 @@ canvas {
     .rotateScreen {
         display: none;
     }
+    
 }
     
 
@@ -775,6 +776,16 @@ canvas {
     
 }
 
+@media only screen and (width:1024px) and (height:600px)and (orientation:landscape){
+    h1 {            
+        display: none;
+    }
+    h3 {           
+        display: none;
+    }
+    
+}
+
 @media only screen and (width:720px) and (height:540px)and (orientation:landscape){
     h1{
         display: none;
@@ -794,10 +805,22 @@ canvas {
     .winnerPepe {        
         top: 38vh;
     }
+
+    .mobilControlBox {        
+        top: 73vh;
+    }
     
 }
 
 @media only screen and (width:653px) and (height:280px)and (orientation:landscape){
+    .heading{
+        font-size: 25px;
+    }
+
+    h2{
+        font-size: 12px;
+    }
+    
     .winDescription {
         font-size: 10px;
     }   
@@ -821,6 +844,10 @@ canvas {
     height: 80px;
     width: 45px;
     top: 40vh;
+}
+
+.mobilControlBox {        
+    top: 74vh;
 }
     
 }

@@ -21,30 +21,36 @@ function init() {
 
 function displayStartScreen() {
     document.getElementById('startscreen').classList.add('startscreen');
+    
 }
 
 function loseGameScreen() {
     clearAllIntervals();
     document.getElementById('lostGame').classList.remove('dNone');
-    //document.getElementById('lostgame').classList.add('startscreen');
+    document.getElementById('controlBTNmobile').classList.add('dNone');
     this.lose_sound.play();
 }
 
 function winnerScreen() {
     clearAllIntervals();
     document.getElementById('winner').classList.remove('dNone');
-    //document.getElementById('lostgame').classList.add('startscreen');
+    document.getElementById('controlBTNmobile').classList.add('dNone');
     this.winner_sound.play();
+}
+
+function reloadGame(){
+    location.reload();
 }
 
 function playNewGame(){
     initLevel();
     init();
-    document.getElementById('startscreen').classList.add('dNone');
-    //document.getElementById('controlBTNmobile').style.display="flex";
+    document.getElementById('startscreen').classList.add('dNone');    
     document.getElementById('lostGame').classList.add('dNone');
     document.getElementById('winner').classList.add('dNone');
+    document.getElementById('controlBTNmobile').classList.remove('dNone');
 }
+
 
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
@@ -131,39 +137,39 @@ function mobilbControllBtn() {
 }
 
 function toggleFullscreen() {
-        let fullscreenIcon = document.getElementById('fullscreen');
+     let fullscreenIcon = document.getElementById('fullscreen');
     
-        if (!isFullscreen()) {
-            enterFullscreen(fullscreenIcon);
-        } else {
-            exitFullscreen();
-        }
+     if (!isFullscreen()) {
+       enterFullscreen(fullscreenIcon);
+     } else {
+       exitFullscreen();
+     }
     }
     
     function isFullscreen() {
-        return (
-            document.fullscreenElement ||
-            document.webkitFullscreenElement ||
-            document.msFullscreenElement
-        );
+     return (
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement
+     );
     }
     
     function enterFullscreen(element) {
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-            element.msRequestFullscreen();
-        } else if (element.webkitRequestFullscreen) {  // iOS Safari
-            element.webkitRequestFullscreen();
-        }
+     if (element.requestFullscreen) {
+       element.requestFullscreen();
+     } else if (element.msRequestFullscreen) { // for IE11 (remove June 15, 2022)
+       element.msRequestFullscreen();
+     } else if (element.webkitRequestFullscreen) { // iOS Safari
+       element.webkitRequestFullscreen();
+     }
     }
     
     function exitFullscreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
+     if (document.exitFullscreen) {
+       document.exitFullscreen();
+     } else if (document.webkitExitFullscreen) {
+       document.webkitExitFullscreen();
+     }
     }
     
 
