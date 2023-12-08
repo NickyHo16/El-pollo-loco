@@ -61,7 +61,7 @@ class World {
                     enemy.isDead();
                     enemy.energy = 0;
                     console.log('chicken is dead');
-                    //enemy.playAnimation(enemy.IMAGES_DEAD);
+                    
                     setTimeout(() => {
 
                         if (!(enemy instanceof Endboss)) {

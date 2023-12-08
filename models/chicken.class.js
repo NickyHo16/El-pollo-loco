@@ -15,6 +15,8 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
     ];
 
+    deadChicken_sound = new Audio('audio/deadChicken.mp3');
+
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);     //super() verwenden wir nur einmal, danach reicht this. ...
@@ -38,6 +40,7 @@ class Chicken extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
                 //this.energy = 0;
+                
             }
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);

@@ -71,7 +71,7 @@ class Character extends MovableObject {
     walking_sound = new Audio('audio/running_ice.mp3');
     jumping_sound = new Audio('audio/hu.mp3');
     hit_sound = new Audio('audio/ohwah.mp3');
-    isdead_sound = new Audio('audio/dead_sound2.mp3');
+    isdead_sound = new Audio('audio/deadScreamPepe.mp3');
 
     isDeadSoundPlayed = false;
 
@@ -117,7 +117,8 @@ class Character extends MovableObject {
             if (this.isDead()&& !this.isDeadSoundPlayed) {
                 this.isdead_sound.play();
                 this.isDeadSoundPlayed = true;
-                this.playAnimation(this.IMAGES_DEAD);                                
+                this.playAnimation(this.IMAGES_DEAD);
+                loseGameScreen();                                
             } else if (this.isHurt()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
                 this.playAnimation(this.IMAGES_HURT);
                 this.hit_sound.play();

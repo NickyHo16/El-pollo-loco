@@ -2,8 +2,10 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+let intervalIds=[];
 
-
+winner_sound = new Audio('audio/winnerSound.mp3');
+lose_sound = new Audio('audio/loseGame.mp3');
 
 function init() {
 
@@ -13,7 +15,7 @@ function init() {
 
     console.log('My character is', world.character); // oder world['character']
     mobilbControllBtn();
-    toggleFullscreen();
+    //toggleFullscreen();
 
 }
 
@@ -21,11 +23,25 @@ function displayStartScreen() {
     document.getElementById('startscreen').classList.add('startscreen');
 }
 
+function loseGameScreen() {
+    clearAllIntervals();
+    document.getElementById('lostGame').classList.remove('dNone');
+    //document.getElementById('lostgame').classList.add('startscreen');
+    this.lose_sound.play();
+}
+
+function winnerScreen() {
+    clearAllIntervals();
+    document.getElementById('winner').classList.remove('dNone');
+    //document.getElementById('lostgame').classList.add('startscreen');
+    this.winner_sound.play();
+}
+
 function playNewGame(){
     initLevel();
     init();
     document.getElementById('startscreen').classList.add('dNone');
-    document.getElementById('controlBTNmobile').style.display="flex";
+    //document.getElementById('controlBTNmobile').style.display="flex";
     document.getElementById('lostGame').classList.add('dNone');
     document.getElementById('winner').classList.add('dNone');
 }
@@ -115,35 +131,41 @@ function mobilbControllBtn() {
 }
 
 function toggleFullscreen() {
-    let fullscreen = document.getElementById('fullscreenIcon');
-    if(fullscreen){
-    fullscreen.addEventListener('click',()=>{
-    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-        exitFullscreen(fullscreen);
-    } else {
-        enterFullscreen(fullscreen);
+        let fullscreenIcon = document.getElementById('fullscreen');
+    
+        if (!isFullscreen()) {
+            enterFullscreen(fullscreenIcon);
+        } else {
+            exitFullscreen();
+        }
     }
-});
+    
+    function isFullscreen() {
+        return (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.msFullscreenElement
+        );
     }
-}
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {  // iOS Safari
-        element.webkitRequestFullscreen();
+    
+    function enterFullscreen(element) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+            element.msRequestFullscreen();
+        } else if (element.webkitRequestFullscreen) {  // iOS Safari
+            element.webkitRequestFullscreen();
+        }
     }
-}
-
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
+    
+    function exitFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
     }
-}
+    
 
 function openHistoryScreen() {
     let elementQuestionmark = document.getElementById('historyScreen');
@@ -181,6 +203,6 @@ function closeHowToPlay() {
 
 
 /* Alternative (quick and dirty), um alle Intervalle zu beenden. */
-//function clearAllIntervals() {
-//    for (let i = 1; i < 9999; i++) window.clearInterval(i);
-//  }
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }
