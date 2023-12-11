@@ -16,8 +16,8 @@ class World {
 
     hasHitBoss = false;
 
-    coin_sound = new Audio('audio/coinSound.mp3');
-    bottle_sound = new Audio('audio/bottle_clank.mp3');
+    //coin_sound = new Audio('audio/coinSound.mp3');
+    //bottle_sound = new Audio('audio/bottle_clank.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -42,6 +42,7 @@ class World {
         }, 100);       //1x? pro Sekunde prüfen, ob Elemente kolliedieren oder nicht
     }
 
+    /**this function checks if the character has bottles to throw */
     checkThrowObjects() {
         if (this.keyboard.D && this.trowBottleBar.collectedBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -53,6 +54,7 @@ class World {
         }
     }
 
+    /**this function checks if the character is colliding with an enemy */
     checkCollisions() {
         this.level.enemies.forEach((enemy, index) => {
             if (!enemy.isDead() && this.character.isColliding(enemy)) {
@@ -82,7 +84,7 @@ class World {
 
 
 
-
+/**this function checks if the character is colliding with an coin, collect an splice from world */
     checkCollisionCoins() { //N2
         this.level.coins.forEach((coins, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
             if (this.character.isColliding(coins)) {
@@ -90,11 +92,13 @@ class World {
                 console.log("Kollision erkannt, lösche Münze an Index " + index);
                 this.coins.splice(index, 1);
                 this.coinBar.setCollectedCoins(this.character.coins);
-                this.coin_sound.play();
+               // this.coin_sound.play();
+                coin_sound.play();
             }
         });
     }
 
+    /**this function checks if the character is colliding with a botlle, collect an splice from world */
     checkCollisionBottles() { //N4
         this.level.salsabottles.forEach((salsabottle, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
             if (this.character.isColliding(salsabottle)) {
@@ -102,11 +106,13 @@ class World {
                 console.log("Kollision erkannt, lösche Bottle an Index " + index);
                 this.salsabottles.splice(index, 1);
                 this.trowBottleBar.setCollectedBottles(this.character.salsabottles);
-                this.bottle_sound.play();
+                //this.bottle_sound.play();
+                bottle_sound.play();
             }
         });
     }
 
+    /**this function checks if the bottle is colliding with the endboss, reduce the energy of the endboss */
     checkCollisionsBottlesToEndboss() {
         this.enemies.forEach((enemy) => {                             // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
             this.throwableObjects.forEach((bottle) => {
@@ -189,5 +195,15 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();                     // alles wieder Rückgängig machen, sodass es nicht mehr gespiegelt ist
 
+    }
+
+    muteAudio(){
+        this.coin_sound.muted=true;    
+        this.bottle_sound.muted=true;               
+    }
+    
+    unmuteAudio(){
+        this.coin_sound.muted=false;    
+        this.bottle_sound.muted=false;        
     }
 }

@@ -1,4 +1,4 @@
-class Character extends MovableObject {
+class Character extends MovableObject {    
     y = 80;
     height = 270;
     width = 150;
@@ -68,12 +68,13 @@ class Character extends MovableObject {
     ];
 
     world;
-    walking_sound = new Audio('audio/running_ice.mp3');
-    jumping_sound = new Audio('audio/hu.mp3');
-    hit_sound = new Audio('audio/ohwah.mp3');
-    isdead_sound = new Audio('audio/deadScreamPepe.mp3');
+    //walking_sound = new Audio('audio/running_ice.mp3');
+    //jumping_sound = new Audio('audio/hu.mp3');
+    //hit_sound = new Audio('audio/ohwah.mp3');
+    //isdead_sound = new Audio('audio/deadScreamPepe.mp3');
+    
 
-    isDeadSoundPlayed = false;
+    //isDeadSoundPlayed = false;
 
 
 
@@ -92,22 +93,26 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.walking_sound.pause();
+            //this.walking_sound.pause();
+            walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                this.walking_sound.play();
+                //this.walking_sound.play();
+                walking_sound.play();
             }
 
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
-                this.walking_sound.play();
+                //this.walking_sound.play();
+                walking_sound.play();
                 this.otherDirection = true;
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {   //!=ist nicht über dem Boden, nur dann springen wir
                 this.jump();                                            // diese Funktion ohne das:&& !this.isAboveGround() und pepe kann fliegen ... 
-                this.jumping_sound.play();
+                //this.jumping_sound.play();
+                jumping_sound.play();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
@@ -115,13 +120,17 @@ class Character extends MovableObject {
 
         setInterval(() => {                                 // damit die Funktion wieder mehr als einmal ausgeführt werden kann
             if (this.isDead()&& !this.isDeadSoundPlayed) {
-                this.isdead_sound.play();
-                this.isDeadSoundPlayed = true;
+                //this.isdead_sound.play();
+                isdead_sound.play();
+                drama_sound.pause();
+                //this.isDeadSoundPlayed = true;
+               // isDeadSoundPlayed = true;
                 this.playAnimation(this.IMAGES_DEAD);
                 loseGameScreen();                                
             } else if (this.isHurt()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
                 this.playAnimation(this.IMAGES_HURT);
-                this.hit_sound.play();
+                //this.hit_sound.play();
+                hit_sound.play();
             } else if (this.isAboveGround()) {              //Wenn er sich in der Luft befindet,
                 this.playAnimation(this.IMAGES_JUMPING);    // zeigen wir diese Animation an 
             } else if                                       // und wenn nicht, zeigen wir die nachfolgenden Bilder an:
@@ -141,6 +150,18 @@ class Character extends MovableObject {
     }
 
 
+muteAudio(){
+    this.walking_sound.muted=true;    
+    this.jumping_soundwalking_sound.muted=true;
+    this.hit_soundwalking_sound.muted=true;
+    this.isdead_soundwalking_sound.muted=true;
+}
 
+unmuteAudio(){
+    this.walking_sound.muted=false;    
+    this.jumping_soundwalking_sound.muted=false;
+    this.hit_soundwalking_sound.muted=false;
+    this.isdead_soundwalking_sound.muted=false;
+}
 
 }

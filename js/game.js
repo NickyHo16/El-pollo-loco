@@ -7,23 +7,33 @@ let intervalIds=[];
 winner_sound = new Audio('audio/winnerSound.mp3');
 lose_sound = new Audio('audio/loseGame.mp3');
 
-function init() {
+walking_sound = new Audio('audio/running_ice.mp3');
+jumping_sound = new Audio('audio/hu.mp3');
+hit_sound = new Audio('audio/ohwah.mp3');
+isdead_sound = new Audio('audio/deadScreamPepe.mp3');
 
+deadBoss_sound = new Audio('audio/deadChicken.mp3'); 
+hurtBoss_sound = new Audio('audio/kikeriki.mp3');
+drama_sound = new Audio('audio/drama.mp3');
+splash_sound = new Audio('audio/bottle_splash.mp3');
+
+coin_sound = new Audio('audio/coinSound.mp3');
+bottle_sound = new Audio('audio/bottle_clank.mp3');
+
+function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     //ctx = canvas.getContext('2d');
-
     console.log('My character is', world.character); // oder world['character']
-    mobilbControllBtn();
-    //toggleFullscreen();
-
+    mobilbControllBtn();    
 }
 
+/**this function open the startsreen in the game if open it */
 function displayStartScreen() {
-    document.getElementById('startscreen').classList.add('startscreen');
-    
+    document.getElementById('startscreen').classList.add('startscreen');    
 }
 
+/**this function open the losegamesreen in the game if you lose */
 function loseGameScreen() {
     clearAllIntervals();
     document.getElementById('lostGame').classList.remove('dNone');
@@ -31,6 +41,7 @@ function loseGameScreen() {
     this.lose_sound.play();
 }
 
+/**this function open the winnersreen in the game if you win */
 function winnerScreen() {
     clearAllIntervals();
     document.getElementById('winner').classList.remove('dNone');
@@ -38,10 +49,12 @@ function winnerScreen() {
     this.winner_sound.play();
 }
 
+/**this function load a new game after you win or lose */
 function reloadGame(){
     location.reload();
 }
 
+/**this function open the game pannel to play new game */
 function playNewGame(){
     initLevel();
     init();
@@ -51,7 +64,7 @@ function playNewGame(){
     document.getElementById('controlBTNmobile').classList.remove('dNone');
 }
 
-
+/**this function defined the keys are pressed the game */
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;            //Taste nach rechts wurde gedrückt
@@ -98,6 +111,7 @@ window.addEventListener("keyup", (e) => {
     console.log(e);
 });
 
+/**this function defined the control buttons for playing the game mobil */
 function mobilbControllBtn() {
     document.getElementById("btnLeft").addEventListener("touchstart", (e) => {
         e.preventDefault();
@@ -136,9 +150,9 @@ function mobilbControllBtn() {
     });
 }
 
+/**following functions toggle the fullcreen in the game */
 function toggleFullscreen() {
-     let fullscreenIcon = document.getElementById('fullscreen');
-    
+     let fullscreenIcon = document.getElementById('fullscreen');    
      if (!isFullscreen()) {
        enterFullscreen(fullscreenIcon);
      } else {
@@ -172,7 +186,7 @@ function toggleFullscreen() {
      }
     }
     
-
+/**this function open the description to show the history of Pepe and the game */
 function openHistoryScreen() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementSettings = document.getElementById('settingsBox');
@@ -180,6 +194,7 @@ function openHistoryScreen() {
     elementSettings.style.display = 'none';
 };
 
+/**this function close the description to show the history of Pepe and the game */
 function closeHistoryScreen() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementSettings = document.getElementById('settingsBox');
@@ -189,6 +204,7 @@ function closeHistoryScreen() {
     elementHistory.style.display = 'flex';
 };
 
+/**this function open the description for how to play the game */
 function openHowToPlay() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementHistory = document.getElementById('historyPepe');
@@ -197,6 +213,7 @@ function openHowToPlay() {
 
 }
 
+/**this function close the description for how to play the game */
 function closeHowToPlay() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementHistory = document.getElementById('historyPepe');
@@ -204,11 +221,53 @@ function closeHowToPlay() {
     elementHistory.style.display = 'flex';
 }
 
-
-
-
-
-/* Alternative (quick and dirty), um alle Intervalle zu beenden. */
+/**this function clear all intervals and stop the game */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }
+
+function muteAudio(){
+    this.winner_sound.muted=true;    
+    this.lose_sound.muted=true;   
+}
+
+function unmuteAudio(){
+    this.winner_sound.muted=false;    
+    this.lose_sound.muted=false;    
+}
+
+/**this function mute all audios and toggle icon */
+function muteAllAudios(){
+    this.winner_sound.volume=0;    
+    this.lose_sound.volume=0;    
+    this.walking_sound.volume=0;   
+    this.jumping_sound.volume=0;  
+    this.hit_sound.volume=0;
+    this.isdead_sound.volume=0;
+    this.deadBoss_sound.volume=0;  
+    this.hurtBoss_sound.volume=0;
+    this.drama_sound.volume=0;
+    this.coin_sound.volume=0;
+    this.bottle_sound.volume=0;
+    
+    document.getElementById('muteBTNSound').classList.add('dNone');
+    document.getElementById('unmuteBTNSound').classList.remove('dNone');
+  }
+  
+/**this function unmute all audios and toggle icon */
+function unmuteAllAudios(){
+    this.winner_sound.volume=1;    
+    this.lose_sound.volume=1;    
+    this.walking_sound.volume=1;   
+    this.jumping_sound.volume=1;  
+    this.hit_sound.volume=1;
+    this.isdead_sound.volume=1;
+    this.deadBoss_sound.volume=1;  
+    this.hurtBoss_sound.volume=1;
+    this.drama_sound.volume=1;
+    this.coin_sound.volume=1;
+    this.bottle_sound.volume=1;
+    
+    document.getElementById('unmuteBTNSound').classList.add('dNone');
+    document.getElementById('muteBTNSound').classList.remove('dNone');
   }

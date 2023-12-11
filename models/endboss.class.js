@@ -44,8 +44,9 @@ class Endboss extends MovableObject {
     world;
     hadFirstContact = false;
 
-    deadBoss_sound = new Audio('audio/deadChicken.mp3'); 
-    hurtBoss_sound = new Audio('audio/kikeriki.mp3');
+    //deadBoss_sound = new Audio('audio/deadChicken.mp3'); 
+    //hurtBoss_sound = new Audio('audio/kikeriki.mp3');
+    //drama_sound = new Audio('audio/drama.mp3');
     
 
 
@@ -68,23 +69,41 @@ class Endboss extends MovableObject {
             if (this.isDead()) {
                 console.log('Boss is dead');
                 this.playAnimation(this.IMAGES_BOSSDEAD);
-                this.deadBoss_sound.play();
-                winnerScreen();
+                //this.deadBoss_sound.play();
+                deadBoss_sound.play();
+                //this.drama_sound.pause();
+                drama_sound.pause();
+                winnerScreen();                
             }
             else if (this.isHurt()) {                                // Wenn der Endboss verletzt ist, fahre mit der Hurt-Animation fort
                 console.log('Boss is hurt');
                 this.playAnimation(this.IMAGES_BOSSHURT);
-                this.hurtBoss_sound.play();
+                //this.hurtBoss_sound.play();
+                hurtBoss_sound.play();
             } else if (world?.character.x + 500 > this.x) {           // Wenn der Endboss in der Nähe des Characters ist, spiele die Attack-Animation ab
                 console.log('Boss is attacking');
                 this.playAnimation(this.IMAGES_BOSSATTACK);
                 this.moveLeft();
+                //this.drama_sound.play();
+                drama_sound.play();
             } else {
                 console.log('Boss is walking');
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);
 
+    }
+
+    muteAudio(){
+        this.deadBoss_sound.muted=true;    
+        this.hurtBoss_sound.muted=true;  
+        this.drama_sound.muted=true;        
+    }
+    
+    unmuteAudio(){
+        this.deadBoss_sound.muted=false;    
+        this.hurtBoss_sound.muted=false;  
+        this.drama_sound.muted=false;       
     }
 
 }

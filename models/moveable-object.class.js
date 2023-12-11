@@ -15,6 +15,8 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {     //hier testen wir ob das y kleiner als 160 pixel ist, weil der Fußboden auf 160 Pixel ist
                 this.y -= this.speedY;                         //auf das y die speed abziehen
                 this.speedY -= this.acceleration;              //negative Geschwindigkeit weil es nach unten schiesst/ von speedY die Beschleunigung abziehen
+            }else{
+                this.y = 180;
             }
         }, 1000 / 25);                                         //Funktion soll 25 Mal pro s ausgeführt werden//war 25
     };

@@ -16,7 +16,7 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
-    splash_sound = new Audio('audio/bottle_splash.mp3');
+   // splash_sound = new Audio('audio/bottle_splash.mp3');
 
 
     constructor(x, y, endboss) {
@@ -40,9 +40,11 @@ class ThrowableObject extends MovableObject {
         
         setInterval(() => {                                    //hier müssen wir regelmäßig die Y Achse verringern
             //this.splash_sound.pause();
+            
             if (this.y >= 280) {                
                 this.playAnimation(this.IMAGES_BOTTLESPLASH);
-                //this.splash_sound.play();// sound hört nicht auf zu spielen           
+                //this.splash_sound.play();// sound hört nicht auf zu spielen
+                          
            } else if(this.hasHitBoss === true ){
             this.playAnimation(this.IMAGES_BOTTLESPLASH);
            }
@@ -51,6 +53,14 @@ class ThrowableObject extends MovableObject {
                 this.x += 10;                 
             }
         }, 25);              //Funktion soll alle 50ms ausgeführt werden
+    }
+
+    muteAudio(){
+        this.splash_sound.muted=true;                         
+    }
+    
+    unmuteAudio(){
+        this.splash_sound.muted=false;                   
     }
 }
     
