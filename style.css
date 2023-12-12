@@ -52,8 +52,7 @@ canvas {
     left: 0;
     bottom: 0;
     right: 0;
-    border: 2px solid black;
-    /*z-index: 2;*/
+    border: 2px solid black;    
 }
 
 .screens {
@@ -73,8 +72,7 @@ canvas {
     right: 0;
     margin: 10px;
     justify-content: space-between;
-    display: flex;
-    /*z-index: 2;*/
+    display: flex;    
 }
 
 .infoIcons {
@@ -95,8 +93,6 @@ canvas {
     display: flex;
     cursor: pointer;
 }
-
-
 
 /*.......... history ..............*/
 
@@ -119,35 +115,22 @@ canvas {
 }
 
 .historyBox {
-    position: absolute;
-    /*display: none;*/
-    /*max-width: 580px;*/
+    position: absolute;    
     top: 50px;
     left: 0;
-    right: 0;
-    /*margin: 10px;*/
+    right: 0;    
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
     padding-left: 50px;
-    padding-right: 50px;
-    /*padding-top: 20px;
-    padding-bottom: 25px;
-    /*overflow: hidden;
-    /*height: 1.1em;
-    word-wrap: break-word;
-    /*white-space: nowrap;
-    animation: typing 35s steps(539) forwards;*/
+    padding-right: 50px;    
 }
 
 .settingsBox {
-    position: absolute;
-    /* display: none; 
-    max-width: 580px;*/
+    position: absolute;    
     top: 50px;
     left: 0;
-    right: 0;
-    /* margin: 10px; */
+    right: 0;    
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
@@ -155,19 +138,9 @@ canvas {
     padding-right: 50px;
 }
 
-.storyBox {
-    /*position: inherit;*/
+.storyBox {    
     display: flex;
-    text-align: center;
-    /* top: 10vh;
-    left: 10vw;
-    right: 10vw;
-    flex-wrap: wrap;
-    /*overflow: hidden;
-    height: 1.1em;
-    word-wrap: break-word;
-    white-space: nowrap;
-    animation: typing 35s steps(539) forwards;*/
+    text-align: center;    
 }
 
 /*.......... howToPlayBox ..............*/
@@ -180,8 +153,7 @@ canvas {
     margin: 10px;
     margin-left: 65px;
     margin-right: 65px;
-    justify-content: space-between;
-    /*justify-content: center;*/
+    justify-content: space-between;    
     display: flex;
     text-align: center;
 }
@@ -196,16 +168,14 @@ canvas {
     height: 35px;
     display: flex;
     cursor: pointer;
-
 }
 
 @keyframes typing {
     from {
         width: 0;
     }
-
     to {
-        width: 100%; /*539ch;*/
+        width: 100%; 
     }
 }
 
@@ -279,18 +249,15 @@ canvas {
 
 .winHeading{
     margin: 0;
-    margin-top: 45px;
-    /* display: none; */
+    margin-top: 45px;    
     font-size: 25px;
     margin-bottom: 15px;
 }
 .winDescription{
-    margin: 0; 
-    /* position: absolute; */
+    margin: 0;     
     margin-left: 45px;
     margin-right: 45px;
-    display: flex;
-    /* margin-top: 50px; */
+    display: flex;    
     font-size: 18px;
 }
 
@@ -302,8 +269,7 @@ canvas {
     left: 0;
     bottom: 0;
     right: 0;
-    border: 2px solid black;
-   /* display: none;*/
+    border: 2px solid black;   
 }
 
 .mobilControlBox {
@@ -396,7 +362,6 @@ canvas {
         font-weight: bold;
     }
 
-
 }
 
 @media only screen and (max-width:540px) {
@@ -425,6 +390,7 @@ canvas {
         top: 5vh;
 
     }
+
 }
 
 @media only screen and (max-width:500px) {
@@ -486,20 +452,17 @@ canvas {
     }
 
     .howToPlayBox {
-
         top: 80%;
-
     }
 
     .howToPlayBox {
-
         top: 55%;
-
     }
 
 }
 
 @media only screen  and (orientation:landscape){
+
     h2 {
         font-size: 16px;
     }    
@@ -516,7 +479,7 @@ canvas {
     
 
 @media only screen  and (orientation:portrait){
-    
+
     .mobileControl {        
         display: none!important;
     }
@@ -560,19 +523,15 @@ canvas {
     }
 
     .backArrow {
-
         height: 20px;
     }
 
     .settingsBox {
-
         top: 35px;
     }
 
     .howToPlayBox {
-
         top: 55%;
-
         margin-left: 30px;
         margin-right: 30px;
     }
@@ -595,7 +554,6 @@ canvas {
     .infoIcons {
         width: 25px;
         height: 25px;
-
     }
 
     .infoBox {
@@ -631,19 +589,15 @@ canvas {
     }
 
     .backArrow {
-
         height: 20px;
     }
 
     .settingsBox {
-
         top: 35px;
     }
 
     .howToPlayBox {
-
         top: 55%;
-
         margin-left: 30px;
         margin-right: 30px;
     }
@@ -704,19 +658,15 @@ canvas {
     }
 
     .backArrow {
-
         height: 20px;
     }
 
     .settingsBox {
-
         top: 35px;
     }
 
     .howToPlayBox {
-
         top: 55%;
-
         margin-left: 30px;
         margin-right: 30px;
     }
@@ -728,7 +678,7 @@ canvas {
 }
 
 
-/**... device controll ...*/
+/**... device control ...*/
 
 @media only screen and (max-width:932px) and (max-height:430px)and (orientation:landscape){
 
@@ -752,9 +702,11 @@ canvas {
     .winDescription{        
         font-size: 14px;
     }
+
 }
     
     @media only screen and (width:1366px) and (height:1024px)and (orientation:landscape){
+
         .winNewGameArrow {            
             top: 37vh;
         }
@@ -767,6 +719,7 @@ canvas {
 }
 
 @media only screen and (width:1368px) and (height:912px)and (orientation:landscape){
+
     .winNewGameArrow {            
         top: 42vh;
     }
@@ -777,6 +730,7 @@ canvas {
 }
 
 @media only screen and (width:1024px) and (height:600px)and (orientation:landscape){
+
     h1 {            
         display: none;
     }
@@ -787,6 +741,7 @@ canvas {
 }
 
 @media only screen and (width:720px) and (height:540px)and (orientation:landscape){
+
     h1{
         display: none;
     }
@@ -813,6 +768,7 @@ canvas {
 }
 
 @media only screen and (width:653px) and (height:280px)and (orientation:landscape){
+    
     .heading{
         font-size: 25px;
     }

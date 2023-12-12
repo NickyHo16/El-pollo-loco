@@ -5,22 +5,29 @@ class Cloud extends MovableObject {
     height = 300;
     speed = 0.15;
 
+    /** constructor load the images and usefull functions, use super() one time, after that use this.
+    * set the position of the clouds in the world
+    */
     constructor() {
         super().loadImage('img/5_background/layers/4_clouds/1.png');
-        this.x = Math.random() * 3500; // eine Zahl zwischen 200 und 500 //das ist für die Anordnung der Chicken
+        this.x = Math.random() * 3500; 
         this.animate();
-
     }
 
-    //
+    /**this function animate the clouds and his moves in one direction          
+     */
     animate() {
         this.moveLeft();
     }
-
+    
+    /**this function allows the repeated execution of the position of the clouds, checks with repetition 60     
+    * that the function can be executed more often again
+    *  change the x axis every seconds so that the clouds move to the left 
+    */
     moveLeft() {
-        setInterval(() => { //diese Funktion beschreibt, wie oft etwas ausgeführt werden soll
-            this.x -= this.speed; // die x-Achse soll sich um -5 pixel verringern aber nicht nur einmal sondern:
-        }, 1000 / 60); // jede Sekunde verändert sich die x-Achse // alles in der geschweiften Klammer wird alle 1000 millisekunden ausgeführt
+        setInterval(() => { 
+            this.x -= this.speed; 
+        }, 1000 / 60); 
     };
 
 }

@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
     speed = 0.15;
     speedY = 0;
-    acceleration = 3.5; //1.1 //2.5
+    acceleration = 3.5; 
     energy = 100;
     bosshealth = 100;
     lastHit = 0;
@@ -10,84 +10,103 @@ class MovableObject extends DrawableObject {
 
     otherDirection = false;
 
+    /**reduce the y axix when jumping and sets the height of the y axis when landing
+     * checks the state 25 times per second so that pepe lands on the ground again
+     */
     applyGravity() {
-        setInterval(() => {                                    //hier müssen wir regelmäßig die Y Achse verringern
-            if (this.isAboveGround() || this.speedY > 0) {     //hier testen wir ob das y kleiner als 160 pixel ist, weil der Fußboden auf 160 Pixel ist
-                this.y -= this.speedY;                         //auf das y die speed abziehen
-                this.speedY -= this.acceleration;              //negative Geschwindigkeit weil es nach unten schiesst/ von speedY die Beschleunigung abziehen
+        setInterval(() => {                                    
+            if (this.isAboveGround() || this.speedY > 0) {     
+                this.y -= this.speedY;                         
+                this.speedY -= this.acceleration;              
             }else{
                 this.y = 180;
             }
-        }, 1000 / 25);                                         //Funktion soll 25 Mal pro s ausgeführt werden//war 25
+        }, 1000 / 25);                                        
     };
 
+    /** ThrowableObjects should always fall*/
     isAboveGround() {
-        if (this instanceof ThrowableObject) {                 // ThrowableObjects should always fall
+        if (this instanceof ThrowableObject) {                
             return true;
         } else {
             return this.y < 160;
         }
     };
 
-    //charcter.isColliding(chicken)
+    /**check if something has collided with 
+     * 
+     * @param {string} mo - is movable object
+     * @returns 
+     */
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
-            this.x < mo.x + mo.width &&                     // Verwenden von mo.x + mo.width statt mo.x allein
-            this.y < mo.y + mo.height;                      // Verwenden von mo.y + mo.height statt mo.y allein
+            this.x < mo.x + mo.width &&                      
+            this.y < mo.y + mo.height;                      
     }
 
+    /**check if something hitted and save the time in a number format, difference in ms
+     * 
+     * @param {string} damage reduce the energy when is colliding
+     */
     hit(damage = 5) {
         this.energy -= damage;
         if (this.energy < 0) {
             this.energy = 0;
-            this.y -= this.speedY;                         //neu hinzugefügt damit Pepe runterfällt                      
-
+            this.y -= this.speedY;                                    
         } else {
-            this.lastHit = new Date().getTime();          //so werden Zeiten in Zahlenformen gespeichert //Difference in ms
+            this.lastHit = new Date().getTime();          
         }
     }
 
-    collectingCoins() {  //N1
+    collectingCoins() {  
         this.coins += 20;
     }
 
-    collectingBottles() {  //N5
+    collectingBottles() {  
         this.salsabottles += 20;
     }
 
 
-    removeThisCoin(coin) {//N3
+    removeThisCoin(coin) {
         const index = this.coins.indexOf(coin);
         if (index !== -1) {
             this.coins.splice(coin, 1);
         }
     }
 
+    /**check if something hurt and save the time in a number format, difference in ms
+     *      
+     */
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit;        // wieviel Zeit ist vergangen = aktueller Zeitpunkt - dem Zeitpunkt wo wir das letzte mal getroffen wurden
-        timepassed = timepassed / 1000;                              //wenn wir Sekunden wollen//Difference in s         
-        return timepassed < 1;                                       //wir wurden innerhalb der letzten 1 Sekunden getroffen//dann returned die Funktion den Wert true
+        let timepassed = new Date().getTime() - this.lastHit;        
+        timepassed = timepassed / 1000;                                    
+        return timepassed < 1;                                      
     }
 
-    isDead() {                                                       //diese Funktion soll true returnen wenn er tot ist, und anderenfalls false
-        return this.energy == 0;                                     //wenn die Energy 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
+    /**return energy = 0 if something is dead */
+    isDead() {                                                       
+        return this.energy == 0;                                     
     }
 
-    playAnimation(images) {
-        //walk animation
-        let i = this.currentImage % images.length;                  // ist das Gleiche wie = let i= 0 % 6; null geteilt duch sechs = 0, Rest 0
+    /**play the pictures one after the other
+     * 
+     * @param {string} images -image path
+     */
+    playAnimation(images) {        
+        let i = this.currentImage % images.length;                  
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage++;                                        // um das gesetzte image immer um eins zu erhöhen
+        this.currentImage++;                                        
     };
 
     moveRight() {
         this.x += this.speed;
     }
 
+    /**reduce the x axis for moving -5 px */
     moveLeft() {
-        this.x -= this.speed;       // die x-Achse soll sich um -5 pixel verringern aber nicht nur einmal sondern: ...
+        this.x -= this.speed;       
     }
 
     jump() {
@@ -99,26 +118,3 @@ class MovableObject extends DrawableObject {
     }
 }
 
-
-
-
-
-// Bessere Formel zur Kollisionsberechnung (Genauer)
-//isColliding(obj) {
-//   return (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) &&
-//       (this.Y + this.offsetY + this.height) >= obj.Y &&
-//       (this.Y + this.offsetY) <= (obj.Y + obj.height) //&&
-//   obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-//}
-
-
-
-
-
-/**
- * diese Funktion benötige ich nicht, weil wir haben die isDead Funktion, die vererbt wird
- * isBossDead() {                                                   //diese Funktion soll true returnen wenn er tot ist, und anderenfalls false
-        return world.endbossBar.bosshealth == 0;                     //wenn die bosshealth 0 ist, dann kommt aus dieser Funktion der Wert 0 raus.
-    }
-
- */

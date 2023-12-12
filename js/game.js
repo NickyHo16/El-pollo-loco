@@ -22,18 +22,21 @@ bottle_sound = new Audio('audio/bottle_clank.mp3');
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-    //ctx = canvas.getContext('2d');
+    world = new World(canvas, keyboard);    
     console.log('My character is', world.character); // oder world['character']
     mobilbControllBtn();    
 }
 
-/**this function open the startsreen in the game if open it */
+/**
+ * this function open the startsreen in the game if open it
+ */
 function displayStartScreen() {
     document.getElementById('startscreen').classList.add('startscreen');    
 }
 
-/**this function open the losegamesreen in the game if you lose */
+/**
+ * this function open the losegamesreen in the game if you lose
+ */
 function loseGameScreen() {
     clearAllIntervals();
     document.getElementById('lostGame').classList.remove('dNone');
@@ -41,7 +44,9 @@ function loseGameScreen() {
     this.lose_sound.play();
 }
 
-/**this function open the winnersreen in the game if you win */
+/**
+ * this function open the winnersreen in the game if you win
+ */
 function winnerScreen() {
     clearAllIntervals();
     document.getElementById('winner').classList.remove('dNone');
@@ -49,12 +54,16 @@ function winnerScreen() {
     this.winner_sound.play();
 }
 
-/**this function load a new game after you win or lose */
+/**
+ * this function load a new game after you win or lose
+ */
 function reloadGame(){
     location.reload();
 }
 
-/**this function open the game pannel to play new game */
+/**
+ * this function open the game pannel to play new game
+ */
 function playNewGame(){
     initLevel();
     init();
@@ -64,54 +73,58 @@ function playNewGame(){
     document.getElementById('controlBTNmobile').classList.remove('dNone');
 }
 
-/**this function defined the keys are pressed the game */
+/**
+ * this function defined the keys are pressed or not the game
+ */
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
-        keyboard.RIGHT = true;            //Taste nach rechts wurde gedrückt
+        keyboard.RIGHT = true;            
     }
     if (e.keyCode == 37) {
-        keyboard.LEFT = true;            //Taste nach links wurde gedrückt
+        keyboard.LEFT = true;           
     }
 
     if (e.keyCode == 38) {
-        keyboard.UP = true;            //Taste nach oben wurde gedrückt
+        keyboard.UP = true;            
     }
     if (e.keyCode == 40) {
-        keyboard.DOWN = true;            //Taste nach unten wurde gedrückt
+        keyboard.DOWN = true;            
     }
     if (e.keyCode == 32) {
-        keyboard.SPACE = true;            //Taste Space/Leerzeichen wurde gedrückt
+        keyboard.SPACE = true;           
     }
     if (e.keyCode == 68) {
-        keyboard.D = true;            //Taste Space/Leerzeichen wurde gedrückt
+        keyboard.D = true;            
     }
     console.log(e);
 });
 
 window.addEventListener("keyup", (e) => {
     if (e.keyCode == 39) {
-        keyboard.RIGHT = false;            //Taste nach rechts wurde losgelassen
+        keyboard.RIGHT = false;            
     }
     if (e.keyCode == 37) {
-        keyboard.LEFT = false;            //Taste nach links wurde losgelassen
+        keyboard.LEFT = false;            
     }
 
     if (e.keyCode == 38) {
-        keyboard.UP = false;            //Taste nach oben wurde losgelassen
+        keyboard.UP = false;            
     }
     if (e.keyCode == 40) {
-        keyboard.DOWN = false;            //Taste nach unten wurde losgelassen
+        keyboard.DOWN = false;            
     }
     if (e.keyCode == 32) {
-        keyboard.SPACE = false;            //Taste Space/Leerzeichen wurde losgelassen
+        keyboard.SPACE = false;           
     }
     if (e.keyCode == 68) {
-        keyboard.D = false;            //Taste Space/Leerzeichen wurde losgelassen
+        keyboard.D = false;            
     }
     console.log(e);
 });
 
-/**this function defined the control buttons for playing the game mobil */
+/**
+ * this function defined the control buttons for playing the game mobil
+ */
 function mobilbControllBtn() {
     document.getElementById("btnLeft").addEventListener("touchstart", (e) => {
         e.preventDefault();
@@ -150,7 +163,9 @@ function mobilbControllBtn() {
     });
 }
 
-/**following functions toggle the fullcreen in the game */
+/**
+ * following functions toggle the fullcreen in the game
+ */
 function toggleFullscreen() {
      let fullscreenIcon = document.getElementById('fullscreen');    
      if (!isFullscreen()) {
@@ -186,7 +201,9 @@ function toggleFullscreen() {
      }
     }
     
-/**this function open the description to show the history of Pepe and the game */
+/**
+ * this function open the description to show the history of Pepe and the game
+ */
 function openHistoryScreen() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementSettings = document.getElementById('settingsBox');
@@ -194,7 +211,9 @@ function openHistoryScreen() {
     elementSettings.style.display = 'none';
 };
 
-/**this function close the description to show the history of Pepe and the game */
+/**
+ * this function close the description to show the history of Pepe and the game
+ */
 function closeHistoryScreen() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementSettings = document.getElementById('settingsBox');
@@ -204,7 +223,9 @@ function closeHistoryScreen() {
     elementHistory.style.display = 'flex';
 };
 
-/**this function open the description for how to play the game */
+/**
+ * this function open the description for how to play the game
+ */
 function openHowToPlay() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementHistory = document.getElementById('historyPepe');
@@ -213,7 +234,9 @@ function openHowToPlay() {
 
 }
 
-/**this function close the description for how to play the game */
+/**
+ * this function close the description for how to play the game 
+ */
 function closeHowToPlay() {
     let elementQuestionmark = document.getElementById('historyScreen');
     let elementHistory = document.getElementById('historyPepe');
@@ -221,7 +244,9 @@ function closeHowToPlay() {
     elementHistory.style.display = 'flex';
 }
 
-/**this function clear all intervals and stop the game */
+/**
+ * this function clear all intervals and stop the game
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
@@ -236,7 +261,9 @@ function unmuteAudio(){
     this.lose_sound.muted=false;    
 }
 
-/**this function mute all audios and toggle icon */
+/**
+ * this function mute all audios and toggle icon
+ */
 function muteAllAudios(){
     this.winner_sound.volume=0;    
     this.lose_sound.volume=0;    
@@ -254,7 +281,9 @@ function muteAllAudios(){
     document.getElementById('unmuteBTNSound').classList.remove('dNone');
   }
   
-/**this function unmute all audios and toggle icon */
+/**
+ * this function unmute all audios and toggle icon
+ */
 function unmuteAllAudios(){
     this.winner_sound.volume=1;    
     this.lose_sound.volume=1;    

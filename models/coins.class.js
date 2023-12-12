@@ -1,7 +1,6 @@
 class Coins extends MovableObject {
 
     y = 100;
-
     height = 100;
     width = 100;
 
@@ -10,25 +9,23 @@ class Coins extends MovableObject {
         'img/8_coin/coin_2.png',
     ];
 
-
-
+    /** constructor load the images and usefull functions, use super() one time, after that use this.
+    * set the position of the coins in the world
+    */
     constructor() {
         super().loadImage('img/8_coin/coin_1.png');
-        this.loadImages(this.IMAGES_COINS);     //super() verwenden wir nur einmal, danach reicht this. ...
-        // this.x = 40;
-        //this.y = 85;
-        this.x = 250 + Math.random() * 1800;//* 2900; // eine Zahl zwischen 200 und 500
-        this.y = Math.random() * 150;
-
-        // this.speed = 0.15 + Math.random() * 0.25;
+        this.loadImages(this.IMAGES_COINS);           
+        this.x = 250 + Math.random() * 1800;
+        this.y = Math.random() * 150;        
         this.animate();
     }
 
+    /**this function animate the coins and his moves in one direction          
+     */
     animate() {
-
-        setInterval(() => {                     // damit die Funktion wieder mehr als einmal ausgeführt werden kann
+        setInterval(() => {                     
             this.playAnimation(this.IMAGES_COINS);
-        }, 200);                               // soll alle 200 ms ausgeführt werden
+        }, 200);                               
     }
 
 

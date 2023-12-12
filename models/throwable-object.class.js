@@ -16,9 +16,9 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
-   // splash_sound = new Audio('audio/bottle_splash.mp3');
-
-
+    /** constructor load the images and usefull functions, use super() one time, after that use this.
+    * set the dimension of the bottles in the world
+    */
     constructor(x, y, endboss) {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_BOTTLEROTATION);
@@ -27,24 +27,17 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.height = 100;
         this.width = 90;
-        this.endboss = endboss; // Hier wird der endboss übergeben
-        this.throw();
-               
+        this.endboss = endboss; 
+        this.throw();               
     }
 
-    throw() {
-       // if (this.characterHasBottles()) { // Überprüfen, ob der Charakter noch Flaschen hat   
-      // if (world.trowBottleBar.collectedBottles > 0) {    
+    /**reduce the y axis for the bottles if they throw */
+    throw() {           
         this.speedY = 30;
-        this.applyGravity();
-        
-        setInterval(() => {                                    //hier müssen wir regelmäßig die Y Achse verringern
-            //this.splash_sound.pause();
-            
+        this.applyGravity();        
+        setInterval(() => {            
             if (this.y >= 280) {                
-                this.playAnimation(this.IMAGES_BOTTLESPLASH);
-                //this.splash_sound.play();// sound hört nicht auf zu spielen
-                          
+                this.playAnimation(this.IMAGES_BOTTLESPLASH);                        
            } else if(this.hasHitBoss === true ){
             this.playAnimation(this.IMAGES_BOTTLESPLASH);
            }
@@ -52,7 +45,7 @@ class ThrowableObject extends MovableObject {
                 this.playAnimation(this.IMAGES_BOTTLEROTATION);
                 this.x += 10;                 
             }
-        }, 25);              //Funktion soll alle 50ms ausgeführt werden
+        }, 25);              
     }
 
     muteAudio(){
@@ -64,18 +57,4 @@ class ThrowableObject extends MovableObject {
     }
 }
     
-    //characterHasBottles() {
-      //  return this.trowBottleBar.collectedBottles > 0; // Überprüfen, ob der Charakter noch Flaschen hat
-    //}
-//}
-
-
-//JUNUS wurfanimation BOTTLE
-//throw() {
- //   this.speedY = 30;
- //   this.applyGravity();
- //   setInterval(() => {                                    //hier müssen wir regelmäßig die Y Achse verringer     
- //           this.playAnimation(this.IMAGES_BOTTLEROTATION);
- //           this.x += 10;    
- //   }, 25);              //Funktion soll alle 50ms ausgeführt werden
-//}
+  

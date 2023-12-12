@@ -3,7 +3,6 @@ class Level {
     clouds;
     salsabottles;
     coins;
-
     backgroundObjects;
     level_end_x = 2200;
 
@@ -17,4 +16,4 @@ class Level {
 
     }
 }
-// überall salsabottles reinschreiben mit s
+

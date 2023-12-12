@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     y = 60;
     speed = 5;
 
-    IMAGES_WALKING = [ //alert pics
+    IMAGES_WALKING = [ 
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
         'img/4_enemie_boss_chicken/2_alert/G7.png',
@@ -44,15 +44,10 @@ class Endboss extends MovableObject {
     world;
     hadFirstContact = false;
 
-    //deadBoss_sound = new Audio('audio/deadChicken.mp3'); 
-    //hurtBoss_sound = new Audio('audio/kikeriki.mp3');
-    //drama_sound = new Audio('audio/drama.mp3');
     
-
-
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
-        this.loadImages(this.IMAGES_WALKING);                        //super() verwenden wir nur einmal, danach reicht this. ...
+        this.loadImages(this.IMAGES_WALKING);                       
         this.loadImages(this.IMAGES_BOSSRUN);
         this.loadImages(this.IMAGES_BOSSATTACK);
         this.loadImages(this.IMAGES_BOSSHURT);
@@ -68,23 +63,19 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 console.log('Boss is dead');
-                this.playAnimation(this.IMAGES_BOSSDEAD);
-                //this.deadBoss_sound.play();
-                deadBoss_sound.play();
-                //this.drama_sound.pause();
+                this.playAnimation(this.IMAGES_BOSSDEAD);                
+                deadBoss_sound.play();                
                 drama_sound.pause();
                 winnerScreen();                
             }
-            else if (this.isHurt()) {                                // Wenn der Endboss verletzt ist, fahre mit der Hurt-Animation fort
+            else if (this.isHurt()) {                                
                 console.log('Boss is hurt');
-                this.playAnimation(this.IMAGES_BOSSHURT);
-                //this.hurtBoss_sound.play();
+                this.playAnimation(this.IMAGES_BOSSHURT);                
                 hurtBoss_sound.play();
-            } else if (world?.character.x + 500 > this.x) {           // Wenn der Endboss in der Nähe des Characters ist, spiele die Attack-Animation ab
+            } else if (world?.character.x + 500 > this.x) {           
                 console.log('Boss is attacking');
                 this.playAnimation(this.IMAGES_BOSSATTACK);
-                this.moveLeft();
-                //this.drama_sound.play();
+                this.moveLeft();                
                 drama_sound.play();
             } else {
                 console.log('Boss is walking');
@@ -108,150 +99,3 @@ class Endboss extends MovableObject {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-   * Junus Boss Animate function/Video
-   */
-
-//animate() {
-//    let i = 0;                                          //variable hinzugefügt, damit das Bild von Anfang abgespielt werden kann
-//   setInterval(() => {                                 // damit die Funktion wieder mehr als einmal ausgeführt werden kann
-//       if (i < 10) {                                   //hinzugefügt weil die Bilder bis zu 10 mal ausgeführt werden bevor die andere Animation startet /BOSSRUN
-//          this.playAnimation(this.IMAGES_WALKING);     //alert pics
-//      } else {
-//          this.playAnimation(this.IMAGES_BOSSRUN);
-//          this.moveLeft();
-//      }
-//       i++;                                                  //hinzugefügt dass immer um ein Bild erhöht wird
-//      if (world.character.x > 2100 && !this.hadFirstContact) { //hinzugefügt, dass die Bilder starten sobald der sich der character bei x>2100 pixeln befindet
-//          i = 0;                                            //hinzugefügt, ist das der Fall dann setzt sich i wieder auf 0
-//           this.hadFirstContact = true;                      //hinzugefügt, die Variable hadFirstContact wird auf True gesetzt, damit die Animation nicht wieder von vorne beginnt sobald wir wieder in die andere Richtung laufen
-
-//       }                                                 //Die Animation wir so nur 1x ausgeführt
-//   }, 200);                               // soll alle 200 ms ausgeführt werden
-
-//  }
-
-
-/**
- * real function Boss Animate start
- */
-
-//animate() {
-//    let i = 0;
-// Hier gehen wir davon aus, dass die x-Position des Endbosses in this.x gespeichert ist.
-
-// setInterval(() => {
-//   if (i < 10) {
-//      if (world.character.x + 400 > this.x) { //(world.character.x > 2100 && world.character.x + 500 > this.x && Math.abs(world.character.x - bossX) < radius) {
-//          i = 0;
-//          this.hadFirstContact = true;
-//        this.playAnimation(this.IMAGES_BOSSATTACK);
-//      this.moveLeft();
-//    if (this.x <= 650) {
-//          this.playAnimation(this.IMAGES_BOSSATTACK);
-//          this.stopMovingLeft();
-//       }
-//   } else if (this.isHurt()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
-//       this.playAnimation(this.IMAGES_BOSSHURT);
-//    } else if (this.isBossDead()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
-//       this.playAnimation(this.IMAGES_BOSSDEAD);
-//   } else {
-//       this.playAnimation(this.IMAGES_WALKING);
-//    }
-
-//     }
-
-// }, 200);
-
-//  }
-
-/**
- * real function Boss Animate end
- */
-
-
-
-
-//}
-
-
-
-
-
-
-
-
-//animate() {
-// let i = 0;
-
-//setInterval(() => {
-// if (i < 10) {
-// if (world.character.x > 2100 && !this.hadFirstContact) {
-//    i = 0;
-//      this.hadFirstContact = true;
-
-//    }
-//      this.playAnimation(this.IMAGES_WALKING);
-//    } else {
-//          this.playAnimation(this.IMAGES_BOSSRUN);
-//            this.moveLeft();
-//          }
-//
-//        i++;
-//      }, 200);
-//  }
-
-/**
- *
- */
-
-//animate() {
-//   let i = 0;
-
-//  setInterval(() => {
-//      if (i < 10) {
-//          if (world.character.x > 2100 && !this.hadFirstContact) {
-//              i = 0;
-//              this.hadFirstContact = true;
-
-//          }
-//         this.playAnimation(this.IMAGES_WALKING);
-//      } else {
-//          this.playAnimation(this.IMAGES_BOSSRUN);
-//          this.moveLeft();
-//      }
-
-//       i++;
-//   }, 200);
-//  }
-
-/**
- * 
- */

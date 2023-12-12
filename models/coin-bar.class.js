@@ -1,17 +1,20 @@
 class CoinBar extends DrawableObject {
     COIN_IMAGES = [
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png',       // 0
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png',       
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/20.png',
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/40.png',
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/60.png',
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/80.png',
-        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png',     //5
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png',     
     ];
 
-    //percentage = 100;
+    
     collectedCoins = 0;
-    //coin_sound = new Audio('audio/coinSound.mp3');
+    
 
+    /** constructor load the images and usefull functions, use super() one time, after that use this.
+    * set the position of the coinbar in the world
+    */
     constructor() {
         super();
         this.loadImages(this.COIN_IMAGES);
@@ -21,13 +24,15 @@ class CoinBar extends DrawableObject {
         this.height = 50;
         this.setCollectedCoins(0);
     }
-
-    //so kann man Funktion von außerhalb auf aufrufen: mit setPercentage(50) dann würde die Variable auf 50 gesetzt werden
-    setCollectedCoins(collectedCoins) { // abgesenen von dieser Variablen müssen wir noch herausfinden, welches dieser Bilder dafür nehmen
-        this.collectedCoins = collectedCoins;   // => aus dieser Prozentzahl müssen wir nun eine Zahl zwischne 0... und 5 ermitteln, weil wir 5 Bilder haben. Mit folgender if Abfrage.
-        let path = this.COIN_IMAGES[this.resolveImageIndex()];//hier müssen wir sagen welches Bild / der Pfad von null bis 5 wird dort eingefügt.
-        this.img = this.imageCache[path];   //Bild holen/laden aus dem Cache und in die Variable img und dadurch wird durch percentage immer das jeweilige Image angezeigt
-        //this.coin_sound.play();//Sound an anderer Stelle aufrufen, weil sonst Consolen Fehler kommt 
+    
+    /**that the function can be called from outside, when collecting coins, the number is displayed by a corresponding image in the bar
+     * 
+     * @param {string} collectedCoins -this is the number of the collected coins
+     */
+    setCollectedCoins(collectedCoins) { 
+        this.collectedCoins = collectedCoins;   
+        let path = this.COIN_IMAGES[this.resolveImageIndex()];
+        this.img = this.imageCache[path];           
     }
     resolveImageIndex() {
         if (this.collectedCoins >= 100) {

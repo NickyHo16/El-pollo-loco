@@ -16,9 +16,9 @@ class World {
 
     hasHitBoss = false;
 
-    //coin_sound = new Audio('audio/coinSound.mp3');
-    //bottle_sound = new Audio('audio/bottle_clank.mp3');
-
+    /** constructor load the world and usefull functions, use super() one time, after that use this.
+    * set the canvas in the world
+    */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -32,6 +32,7 @@ class World {
         this.character.world = this;
     }
 
+    /**check if elements are colliding */
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -39,7 +40,7 @@ class World {
             this.checkCollisionCoins();
             this.checkCollisionBottles();
             this.checkCollisionsBottlesToEndboss()
-        }, 100);       //1x? pro Sekunde prüfen, ob Elemente kolliedieren oder nicht
+        }, 100);       
     }
 
     /**this function checks if the character has bottles to throw */
@@ -50,7 +51,6 @@ class World {
             this.trowBottleBar.collectedBottles -= 20;
             this.character.salsabottles -= 20;
             this.trowBottleBar.setCollectedBottles(this.trowBottleBar.collectedBottles);
-
         }
     }
 
@@ -61,52 +61,40 @@ class World {
                 if (this.character.isAboveGround()) {
                     this.character.jump();
                     enemy.isDead();
-                    enemy.energy = 0;
-                    console.log('chicken is dead');
-                    
+                    enemy.energy = 0;                       
                     setTimeout(() => {
-
-                        if (!(enemy instanceof Endboss)) {
-                            // enemy.energy = 0;
+                        if (!(enemy instanceof Endboss)) {                            
                             let index = this.level.enemies.indexOf(enemy);
-                            this.level.enemies.splice(index, 1);
-                            console.log('chicken is far far away');
+                            this.level.enemies.splice(index, 1);                            
                         }
                     }, 250);
                 } else {
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
                 }
-
             }
         });
     }
 
-
-
-/**this function checks if the character is colliding with an coin, collect an splice from world */
-    checkCollisionCoins() { //N2
-        this.level.coins.forEach((coins, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+    /**this function checks if the character is colliding with an coin, collect an splice this coin from world */
+    checkCollisionCoins() { 
+        this.level.coins.forEach((coins, index) => { 
             if (this.character.isColliding(coins)) {
-                this.character.collectingCoins();
-                console.log("Kollision erkannt, lösche Münze an Index " + index);
+                this.character.collectingCoins();                
                 this.coins.splice(index, 1);
-                this.coinBar.setCollectedCoins(this.character.coins);
-               // this.coin_sound.play();
+                this.coinBar.setCollectedCoins(this.character.coins);               
                 coin_sound.play();
             }
         });
     }
 
     /**this function checks if the character is colliding with a botlle, collect an splice from world */
-    checkCollisionBottles() { //N4
-        this.level.salsabottles.forEach((salsabottle, index) => { // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+    checkCollisionBottles() { 
+        this.level.salsabottles.forEach((salsabottle, index) => { 
             if (this.character.isColliding(salsabottle)) {
-                this.character.collectingBottles();
-                console.log("Kollision erkannt, lösche Bottle an Index " + index);
+                this.character.collectingBottles();                
                 this.salsabottles.splice(index, 1);
-                this.trowBottleBar.setCollectedBottles(this.character.salsabottles);
-                //this.bottle_sound.play();
+                this.trowBottleBar.setCollectedBottles(this.character.salsabottles);                
                 bottle_sound.play();
             }
         });
@@ -114,9 +102,9 @@ class World {
 
     /**this function checks if the bottle is colliding with the endboss, reduce the energy of the endboss */
     checkCollisionsBottlesToEndboss() {
-        this.enemies.forEach((enemy) => {                             // enemy ist immer der aktuelle Gegner/Wenn ich 5 Gegner habe, wird immer das in der geschweiften Klammer jede Sekunde für jeden Gegnerausgeführt .
+        this.enemies.forEach((enemy) => {                            
             this.throwableObjects.forEach((bottle) => {
-                if (bottle.isColliding(enemy) && !bottle.hasHitBoss) {// Wenn eine Kollision zwischen der Flasche und dem Endboss auftritt:
+                if (bottle.isColliding(enemy) && !bottle.hasHitBoss) {
                     if (enemy instanceof Endboss) {
                         enemy.hit(25);
                         this.endbossBar.setBosshealth(enemy.energy);
@@ -130,11 +118,11 @@ class World {
         });
     }
 
-    draw() { // weil die Welt gezeichnet werden muss
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)//canvas wird gelöscht
+    /**this function draw the world */
+    draw() { 
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-        this.ctx.translate(this.camera_x, 0);
-        // this.addObjectsToMap(this.level.salsabottles);
+        this.ctx.translate(this.camera_x, 0);        
         this.addObjectsToMap(this.level.backgroundObjects);
 
         this.addObjectsToMap(this.level.clouds);
@@ -149,15 +137,11 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);//forward
 
-        this.addToMap(this.character);//hier brauchen wir das this, weil wir von dieser Welt auf den Contaxt drauf zugreifen wollen. 
-        //alle Varibalen, die wir aus dieser Klasse verwenden, müssen wir mit -this- öffnen.
+        this.addToMap(this.character);         
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-
         this.ctx.translate(-this.camera_x, 0);
-
-
-        //damit wird draw immer wieder aufgerufen
+        
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
@@ -184,16 +168,18 @@ class World {
         }
     }
 
+    /**this function mirrors the images when they go left */
     flipImage(mo) {
-        this.ctx.save();                        // aktueller Status von unserem Context speichern
-        this.ctx.translate(mo.width, 0);        // Methode ändern wie wir die Bilder einfügen
-        this.ctx.scale(-1, 1);                  // Bild umdrehen an der y-Achse - spiegeln
+        this.ctx.save();                         
+        this.ctx.translate(mo.width, 0);        
+        this.ctx.scale(-1, 1);                  
         mo.x = mo.x * -1;
     }
 
+    /**this function mirrors the images back in original position when they go right-undoes the mirroring */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
-        this.ctx.restore();                     // alles wieder Rückgängig machen, sodass es nicht mehr gespiegelt ist
+        this.ctx.restore();                     
 
     }
 

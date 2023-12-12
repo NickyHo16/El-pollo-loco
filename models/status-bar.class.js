@@ -1,15 +1,18 @@
 class StatusBar extends DrawableObject {
     IMAGES = [
-        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png',       // 0
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png',       
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png',     //5
+        'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png',     
     ];
 
     percentage = 100;
 
+    /** constructor load the images and usefull functions, use super() one time, after that use this.
+    * set the position of the statusbar Pepe in the world
+    */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -20,11 +23,14 @@ class StatusBar extends DrawableObject {
         this.setPercentage(100);
     }
 
-    //so kann man Funktion von außerhalb auf aufrufen: mit setPercentage(50) dann würde die Variable auf 50 gesetzt werden
-    setPercentage(percentage) { // abgesenen von dieser Variablen müssen wir noch herausfinden, welches dieser Bilder dafür nehmen
-        this.percentage = percentage;   // => aus dieser Prozentzahl müssen wir nun eine Zahl zwischne 0... und 5 ermitteln, weil wir 5 Bilder haben. Mit folgender if Abfrage.
-        let path = this.IMAGES[this.resolveImageIndex()];//hier müssen wir sagen welches Bild / der Pfad von null bis 5 wird dort eingefügt.
-        this.img = this.imageCache[path];   //Bild holen/laden aus dem Cache und in die Variable img und dadurch wird durch percentage immer das jeweilige Image angezeigt
+    /**that the function can be called from outside, when boss ist hitted or dead, the percentage is displayed by a corresponding image in the bar
+     * 
+     * @param {string} percentage -set the health in the bar for Pepe
+     */
+    setPercentage(percentage) { 
+        this.percentage = percentage;   
+        let path = this.IMAGES[this.resolveImageIndex()];
+        this.img = this.imageCache[path];   
     }
     resolveImageIndex() {
         if (this.percentage == 100) {

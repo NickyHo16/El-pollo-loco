@@ -1,16 +1,18 @@
 class TrowBottleBar extends DrawableObject {
     BOTTLE_IMAGES = [
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png',       // 0
+        'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png',       
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png',
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/40.png',
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/60.png',
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/80.png',
-        'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png'     //5
+        'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png'     
     ];
 
-    collectedBottles = 0;
-    //bottle_sound = new Audio('audio/bottle_clank.mp3');//this.coin_sound.play();
+    collectedBottles = 0;    
 
+    /** constructor load the images and usefull functions, use super() one time, after that use this.
+    * set the dimension and position of the bottlebar in the world
+    */
     constructor() {
         super();
         this.loadImages(this.BOTTLE_IMAGES);
@@ -21,13 +23,16 @@ class TrowBottleBar extends DrawableObject {
         this.setCollectedBottles(0);
     }
 
-    //so kann man Funktion von außerhalb auf aufrufen: mit setPercentage(50) dann würde die Variable auf 50 gesetzt werden
-    setCollectedBottles(collectedBottles) { // abgesenen von dieser Variablen müssen wir noch herausfinden, welches dieser Bilder dafür nehmen
-        this.collectedBottles = collectedBottles;   // => aus dieser Prozentzahl müssen wir nun eine Zahl zwischne 0... und 5 ermitteln, weil wir 5 Bilder haben. Mit folgender if Abfrage.
-        let path = this.BOTTLE_IMAGES[this.resolveImageIndex()];//hier müssen wir sagen welches Bild / der Pfad von null bis 5 wird dort eingefügt.
-        this.img = this.imageCache[path];   //Bild holen/laden aus dem Cache und in die Variable img und dadurch wird durch percentage immer das jeweilige Image angezeigt
-        //this.bottle_sound.play();//Sound an anderer Stelle aufrufen, weil sonst Consolen Fehler kommt 
+    /**that the function can be called from outside, when boss ist hitted or dead, the percentage is displayed by a corresponding image in the bar
+     * 
+     * @param {string} collectedBottles -set the collected bottles in a number in the bar
+     */
+    setCollectedBottles(collectedBottles) { 
+        this.collectedBottles = collectedBottles;   
+        let path = this.BOTTLE_IMAGES[this.resolveImageIndex()];
+        this.img = this.imageCache[path];            
     }
+
     resolveImageIndex() {
         if (this.collectedBottles >= 100) {
             return 5;

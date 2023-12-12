@@ -68,19 +68,13 @@ class Character extends MovableObject {
     ];
 
     world;
-    //walking_sound = new Audio('audio/running_ice.mp3');
-    //jumping_sound = new Audio('audio/hu.mp3');
-    //hit_sound = new Audio('audio/ohwah.mp3');
-    //isdead_sound = new Audio('audio/deadScreamPepe.mp3');
-    
 
-    //isDeadSoundPlayed = false;
-
-
-
+    /**
+    * constructor load the images and usefull functions, use super() one time, after that use this.
+    */
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
-        this.loadImages(this.IMAGES_WALKING);     //wir laden die Bilder am Anfang // super() verwenden wir nur einmal, danach reicht this. ...
+        this.loadImages(this.IMAGES_WALKING);    
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_IDLE);
@@ -91,60 +85,57 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    /**this function animate the chacacter and his moves in several directions with sounds
+     * it definded also the end of the level for Pepe
+     * and the movement of the camera with Pepe in the world
+     * sets the time how often the function should be executed  
+     */
     animate() {
-        setInterval(() => {
-            //this.walking_sound.pause();
+        setInterval(() => {            
             walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
-                this.otherDirection = false;
-                //this.walking_sound.play();
+                this.otherDirection = false;                
                 walking_sound.play();
             }
-
             if (this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                //this.walking_sound.play();
+                this.moveLeft();                
                 walking_sound.play();
                 this.otherDirection = true;
             }
-
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {   //!=ist nicht über dem Boden, nur dann springen wir
-                this.jump();                                            // diese Funktion ohne das:&& !this.isAboveGround() und pepe kann fliegen ... 
-                //this.jumping_sound.play();
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {   
+                this.jump();                                                            
                 jumping_sound.play();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-
-        setInterval(() => {                                 // damit die Funktion wieder mehr als einmal ausgeführt werden kann
-            if (this.isDead()&& !this.isDeadSoundPlayed) {
-                //this.isdead_sound.play();
+        /**this function allows the repeated execution of the different states of Pepe and his sounds, checks with repetition 100 
+        * and play his animation for this state
+        */
+        setInterval(() => {                                 
+            if (this.isDead()&& !this.isDeadSoundPlayed) {                
                 isdead_sound.play();
-                drama_sound.pause();
-                //this.isDeadSoundPlayed = true;
-               // isDeadSoundPlayed = true;
+                drama_sound.pause();                
                 this.playAnimation(this.IMAGES_DEAD);
                 loseGameScreen();                                
-            } else if (this.isHurt()) {                     //wenn wir verletzt sind, spielen wir diese Animati9on zwischen den geschweiften Klammern ab
-                this.playAnimation(this.IMAGES_HURT);
-                //this.hit_sound.play();
+            } else if (this.isHurt()) {                     
+                this.playAnimation(this.IMAGES_HURT);                
                 hit_sound.play();
-            } else if (this.isAboveGround()) {              //Wenn er sich in der Luft befindet,
-                this.playAnimation(this.IMAGES_JUMPING);    // zeigen wir diese Animation an 
-            } else if                                       // und wenn nicht, zeigen wir die nachfolgenden Bilder an:
-                (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {  //logisches oder || entweder links true oder rechts true
-                //this.x += this.speed;                    
-                this.playAnimation(this.IMAGES_WALKING);    //walk animation
+            } else if (this.isAboveGround()) {              
+                this.playAnimation(this.IMAGES_JUMPING);     
+            } else if                                       
+                (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {                                      
+                this.playAnimation(this.IMAGES_WALKING);    
             } else if (this.world.keyboard.D) {
-                this.playAnimation(this.IMAGES_IDLE);       //IDLE animation
+                this.playAnimation(this.IMAGES_IDLE);       
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 100);                                            // soll alle 50 ms ausgeführt werden //war vorher 50
+        }, 100);                                            
     }
 
+    /** defined the speed while Pepe is jumping */
     jump() {
         this.speedY = 30;
     }
