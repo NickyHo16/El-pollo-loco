@@ -4,6 +4,13 @@ class SalsaBottle extends MovableObject {
     height = 100;
     width = 100;
 
+    offSet = {
+        top: 10, 
+        bottom: 40, 
+        left: 0, 
+        right: 0
+    }
+
     IMAGES_SAlSABOTTLE = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png',

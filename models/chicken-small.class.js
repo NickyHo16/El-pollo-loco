@@ -4,6 +4,13 @@ class ChickenSmall extends MovableObject {
     height = 90;
     width = 90;
 
+    offSet = {
+        top: 5,
+        right: 120,
+        bottom: 0,
+        left: 120
+    }
+
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',

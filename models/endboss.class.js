@@ -2,7 +2,14 @@ class Endboss extends MovableObject {
     height = 400;
     width = 300;
     y = 60;
-    speed = 5;
+    speed = 25;
+
+    offSet = {
+        top: 20,
+        right: 40,
+        bottom: 15,
+        left: 100
+    }
 
     IMAGES_WALKING = [ 
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -61,24 +68,20 @@ class Endboss extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.isDead()) {
-                console.log('Boss is dead');
+            if (this.isDead()) {                
                 this.playAnimation(this.IMAGES_BOSSDEAD);                
                 deadBoss_sound.play();                
                 drama_sound.pause();
                 winnerScreen();                
             }
-            else if (this.isHurt()) {                                
-                console.log('Boss is hurt');
+            else if (this.isHurt()) {                   
                 this.playAnimation(this.IMAGES_BOSSHURT);                
                 hurtBoss_sound.play();
-            } else if (world?.character.x + 500 > this.x) {           
-                console.log('Boss is attacking');
+            } else if (world?.character.x + 500 > this.x) {               
                 this.playAnimation(this.IMAGES_BOSSATTACK);
                 this.moveLeft();                
                 drama_sound.play();
-            } else {
-                console.log('Boss is walking');
+            } else {                
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);

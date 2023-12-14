@@ -35,12 +35,14 @@ class World {
     /**check if elements are colliding */
     run() {
         setInterval(() => {
-            this.checkCollisions();
-            this.checkThrowObjects();
+            this.checkCollisions();            
             this.checkCollisionCoins();
             this.checkCollisionBottles();
             this.checkCollisionsBottlesToEndboss()
-        }, 100);       
+        }, 100); 
+        setInterval(() => {
+            this.checkThrowObjects();
+        }, 250);      
     }
 
     /**this function checks if the character has bottles to throw */
@@ -58,7 +60,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy, index) => {
             if (!enemy.isDead() && this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround()) {
+                if (this.character.isAboveGround(enemy)&& !this.character.isHurt()) {
                     this.character.jump();
                     enemy.isDead();
                     enemy.energy = 0;                       

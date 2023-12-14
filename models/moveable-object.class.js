@@ -8,6 +8,13 @@ class MovableObject extends DrawableObject {
     coins = 0;
     salsabottles = 0;
 
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    };
+
     otherDirection = false;
 
     /**reduce the y axix when jumping and sets the height of the y axis when landing
@@ -35,15 +42,35 @@ class MovableObject extends DrawableObject {
 
     /**check if something has collided with 
      * 
-     * @param {string} mo - is movable object
+     * @param {string} mo - is moveable object
      * @returns 
      */
+    //isColliding(mo) {
+     //   return this.x + this.width > mo.x &&
+     //       this.y + this.height > mo.y &&
+     //       this.x < mo.x + mo.width &&                      
+     //       this.y < mo.y + mo.height;                      
+   // }
+
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x + mo.width &&                      
-            this.y < mo.y + mo.height;                      
+        return (
+            this.x + this.offset.left + this.width - this.offset.right >=
+            mo.x + mo.offset.left &&
+            this.y + this.offset.top + this.height - this.offset.bottom >=
+            mo.y + mo.offset.top &&
+            this.x + this.offset.left <= mo.x + mo.offset.left + mo.width - mo.offset.right &&
+            this.y + this.offset.top <= mo.y + mo.offset.top + mo.height - mo.offset.bottom
+        );
     }
+
+    //isColliding(mo) {
+     //   return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+     //       this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+     //       this.x + this.offset.bottom < mo.x + mo.width - mo.offset.right &&
+      //      this.y < mo.y + mo.height;
+  //  }
+
+   
 
     /**check if something hitted and save the time in a number format, difference in ms
      * 

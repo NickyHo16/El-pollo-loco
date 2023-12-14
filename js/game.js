@@ -16,14 +16,14 @@ deadBoss_sound = new Audio('audio/deadChicken.mp3');
 hurtBoss_sound = new Audio('audio/kikeriki.mp3');
 drama_sound = new Audio('audio/drama.mp3');
 splash_sound = new Audio('audio/bottle_splash.mp3');
+deadChicken_sound = new Audio('audio/deadChicken.mp3');
 
 coin_sound = new Audio('audio/coinSound.mp3');
 bottle_sound = new Audio('audio/bottle_clank.mp3');
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);    
-    console.log('My character is', world.character); // oder world['character']
+    world = new World(canvas, keyboard);        
     mobilbControllBtn();    
 }
 
@@ -41,6 +41,8 @@ function loseGameScreen() {
     clearAllIntervals();
     document.getElementById('lostGame').classList.remove('dNone');
     document.getElementById('controlBTNmobile').classList.add('dNone');
+    document.getElementById('controlMuteBTNmobile').classList.add('dNone');
+    this.walking_sound.pause();
     this.lose_sound.play();
 }
 
@@ -51,6 +53,7 @@ function winnerScreen() {
     clearAllIntervals();
     document.getElementById('winner').classList.remove('dNone');
     document.getElementById('controlBTNmobile').classList.add('dNone');
+    document.getElementById('controlMuteBTNmobile').classList.add('dNone');
     this.winner_sound.play();
 }
 
@@ -71,6 +74,7 @@ function playNewGame(){
     document.getElementById('lostGame').classList.add('dNone');
     document.getElementById('winner').classList.add('dNone');
     document.getElementById('controlBTNmobile').classList.remove('dNone');
+    document.getElementById('controlMuteBTNmobile').classList.remove('dNone');    
 }
 
 /**
@@ -95,8 +99,7 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.keyCode == 68) {
         keyboard.D = true;            
-    }
-    console.log(e);
+    }    
 });
 
 window.addEventListener("keyup", (e) => {
@@ -118,8 +121,7 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.keyCode == 68) {
         keyboard.D = false;            
-    }
-    console.log(e);
+    }    
 });
 
 /**
@@ -275,10 +277,12 @@ function muteAllAudios(){
     this.hurtBoss_sound.volume=0;
     this.drama_sound.volume=0;
     this.coin_sound.volume=0;
-    this.bottle_sound.volume=0;
+    this.bottle_sound.volume=0;    
     
     document.getElementById('muteBTNSound').classList.add('dNone');
-    document.getElementById('unmuteBTNSound').classList.remove('dNone');
+    document.getElementById('unmuteBTNSound').classList.remove('dNone');    
+    document.getElementById('muteBTNSoundMobile').classList.add('dNone');
+    document.getElementById('unmuteBTNSoundMobile').classList.remove('dNone'); 
   }
   
 /**
@@ -295,8 +299,10 @@ function unmuteAllAudios(){
     this.hurtBoss_sound.volume=1;
     this.drama_sound.volume=1;
     this.coin_sound.volume=1;
-    this.bottle_sound.volume=1;
+    this.bottle_sound.volume=1;    
     
     document.getElementById('unmuteBTNSound').classList.add('dNone');
     document.getElementById('muteBTNSound').classList.remove('dNone');
+    document.getElementById('unmuteBTNSoundMobile').classList.add('dNone');
+    document.getElementById('muteBTNSoundMobile').classList.remove('dNone');
   }

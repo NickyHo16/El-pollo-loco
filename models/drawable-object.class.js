@@ -6,6 +6,13 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
+
+    offset={
+        top:130,
+        right: 145,
+        bottom: 0,
+        left: 85
+    }
     
     /**this function load all images in the canvas */
     loadImage(path) {
@@ -28,11 +35,17 @@ class DrawableObject {
      * @param {string} ctx - ctx is context - the world -canvas rendering context
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {             
+        if (this instanceof Character || this instanceof Chicken || this instanceof ChickenSmall || this instanceof Endboss || this instanceof Coins || this instanceof SalsaBottle) {             
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'transparent';
             ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'transparent';
+            ctx.rect(this.x+this.offset.left, this.y+this.offset.top, this.width-this.offset.right-this.offset.left, this.height-this.offset.bottom-this.offset.top);
             ctx.stroke();
         }
     }

@@ -4,6 +4,13 @@ class Character extends MovableObject {
     width = 150;
     speed = 10;
 
+    offset={
+        top:0,
+        right: 50,
+        bottom: 0,
+        left: 10
+    }
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -83,6 +90,7 @@ class Character extends MovableObject {
 
         this.applyGravity();
         this.animate();
+        this.idleAnimation();
     }
 
     /**this function animate the chacacter and his moves in several directions with sounds
@@ -135,11 +143,27 @@ class Character extends MovableObject {
         }, 100);                                            
     }
 
-    /** defined the speed while Pepe is jumping */
+    /** this funcktion defined the speed while Pepe is jumping */
     jump() {
         this.speedY = 30;
     }
 
+    /** this funcktion defined when Pepe is going to sleep */
+    idleAnimation() {
+        let i;
+        setInterval(() => {
+            i++;
+            if (this.world.keyboard.SPACE || this.world.keyboard.LEFT || this.world.keyboard.RIGHT || this.world.keyboard.D) {
+                i = 0;
+            }
+        }, 100);
+
+        setInterval(() => {
+            if (i > 25) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+            }
+        }, 100);
+    }
 
 muteAudio(){
     this.walking_sound.muted=true;    

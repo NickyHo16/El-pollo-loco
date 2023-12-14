@@ -272,6 +272,15 @@ canvas {
     border: 2px solid black;   
 }
 
+.mobileMuteControl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid black;   
+}
+
 .mobilControlBox {
     position: absolute;
     left: 0;
@@ -282,6 +291,17 @@ canvas {
     justify-content: space-between;
     display: flex;
     top: 77vh;
+}
+
+.mobilMuteControlBox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    justify-content: center;
+    display: flex;    
 }
 
 .controlIcons {
@@ -482,6 +502,10 @@ canvas {
 
     .mobileControl {        
         display: none!important;
+    }
+
+    .mobilMuteControlBox {
+        display: none;
     }
 
 }
@@ -768,7 +792,7 @@ canvas {
 }
 
 @media only screen and (width:653px) and (height:280px)and (orientation:landscape){
-    
+
     .heading{
         font-size: 25px;
     }

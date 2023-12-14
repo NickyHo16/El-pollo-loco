@@ -4,6 +4,13 @@ class Chicken extends MovableObject {
     height = 90;
     width = 90;
 
+    offSet = {
+        top: 10,
+        right: 0,
+        bottom: 0,
+        left: 0
+    }
+
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
@@ -13,8 +20,7 @@ class Chicken extends MovableObject {
     IMAGES_DEAD = [
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
     ];
-
-    deadChicken_sound = new Audio('audio/deadChicken.mp3');
+    
 
     /** constructor load the images and usefull functions, use super() one time, after that use this.
     * set the position of the chickens in the world
@@ -43,13 +49,13 @@ class Chicken extends MovableObject {
     * and play his animation for this state
     * that the function can be executed more often again
     */
-        setInterval(() => {                
+        setInterval(() => {                        
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-                this.speed = 0;                  
+                this.speed = 0;                                  
             }
             if (!this.isDead()) {
-                this.playAnimation(this.IMAGES_WALKING);
+                this.playAnimation(this.IMAGES_WALKING);                
             }
         }, 200);                               
     }
