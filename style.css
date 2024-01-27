@@ -291,6 +291,7 @@ canvas {
     justify-content: space-between;
     display: flex;
     top: 77vh;
+    z-index: 2;
 }
 
 .mobilMuteControlBox {
